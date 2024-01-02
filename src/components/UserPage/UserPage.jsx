@@ -30,12 +30,12 @@ function UserPage() {
       <LogOutButton className="btn" />
       {JSON.stringify(timeline[0])}
       <br />
-      <ul>
+      {/* <ul>
         <li>{timeline[0].title}</li>
         <li><img src={timeline[0].media_url}/></li>
         <li>{timeline[1].title}</li>
         <li><img src={timeline[1].media_url}/></li>
-      </ul>
+      </ul> */}
       
     </div>
   );
