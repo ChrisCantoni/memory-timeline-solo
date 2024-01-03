@@ -2,10 +2,11 @@ import React, {useState, useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
+import PostsPage from '../PostsPage/PostsPage';
 
 function UserPage() {
 
-  const [timeline, setTimeline] = useState({})
+  const [timeline, setTimeline] = useState([])
 
   const getTimeline = () => {
     axios.get('/api/post').then((response) => {
@@ -26,16 +27,13 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
-      {JSON.stringify(timeline[0])}
       <br />
-      {/* <ul>
-        <li>{timeline[0].title}</li>
-        <li><img src={timeline[0].media_url}/></li>
-        <li>{timeline[1].title}</li>
-        <li><img src={timeline[1].media_url}/></li>
-      </ul> */}
+      <ul>
+        {timeline.map((post) => {
+          return <li><PostsPage key={post.id} post={post}/></li>
+        })}
+      </ul>
+      
       
     </div>
   );

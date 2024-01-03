@@ -23,8 +23,7 @@ function TimelinePage() {
     return (
         <>
         <h1>This is the Timelines page</h1>
-        <p>{JSON.stringify(timelines)}</p>
-        <ul>
+        <ul>   
             {timelines.map((item) => {
                 return <li><TimelineItem key={item.id} item={item}/></li>
             })}
