@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import TimelinePage from '../TimelinePage/TimelinePage';
 import './App.css';
 
 function App() {
@@ -104,6 +104,19 @@ function App() {
               // If the user is already logged in, 
               // redirect them to the /user page
               <Redirect to="/user" />
+              :
+              // Otherwise, show the Landing page
+              <LandingPage />
+            }
+          </Route>
+          <Route
+            exact
+            path="/timelines"
+          >
+            {user.id ?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <TimelinePage/>
               :
               // Otherwise, show the Landing page
               <LandingPage />
