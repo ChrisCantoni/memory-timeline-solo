@@ -3,6 +3,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useSelector} from 'react-redux';
 import axios from 'axios';
 import PostsPage from '../PostsPage/PostsPage';
+import PostInput from '../PostInput/PostInput';
 
 function UserPage() {
 
@@ -18,6 +19,7 @@ function UserPage() {
     })
   }
 
+
   useEffect(() => {
     getTimeline();
   }, []);
@@ -28,12 +30,12 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />
+      <PostInput />
       <ul>
         {timeline.map((post) => {
           return <li><PostsPage key={post.id} post={post}/></li>
         })}
       </ul>
-      
       
     </div>
   );
