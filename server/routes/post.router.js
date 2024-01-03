@@ -23,6 +23,17 @@ router.get('/', (req, res) => {
  */
 router.post('/', (req, res) => {
   // POST route code here
+  queryText = `INSERT INTO "post" ("title", "media_url", "date", "date_created", "user_id")
+  VALUES (
+    $1, $2, $3, CURRENT_TIMESTAMP, $4
+  );`
+  pool.query(queryText, [req.body.title, req.body.description, req.body.date, req.user.id])
+  .then((result) => {
+    res.sendStatus(201)
+  }).catch((e) => {
+    console.error(e);
+    res.sendStatus(500);
+  })
 });
 
 module.exports = router;
