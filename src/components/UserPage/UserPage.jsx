@@ -27,8 +27,6 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <br />
       <PostInput />
-      {JSON.stringify(post)}
-      {/* {JSON.stringify(timeline)} */}
       <ul>
         {post.map((item) => {
           return <li><PostsPage key={item.id} post={item}/></li>
