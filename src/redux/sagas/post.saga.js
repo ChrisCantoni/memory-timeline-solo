@@ -11,6 +11,16 @@ function* addPost(action) {
     }
   }
 
+function* fetchDetails(action) {
+    try {
+        const response = yield axios.get(`/api/post/details/${action.payload}`);
+        yield put({type: 'SET_DETAILS', payload: response.data});
+    } catch (error) {
+        console.log('Could not fetch details', error)
+        alert('Something went wrong')
+    }
+}
+
 function* fetchPosts() {
     try {
         const response = yield axios.get('/api/post');
@@ -25,6 +35,7 @@ function* fetchPosts() {
 function* postSaga() {
     yield takeLatest('FETCH_POSTS', fetchPosts);
     yield takeLatest('ADD_POST', addPost);
+    yield takeLatest('FETCH_DETAILS', fetchDetails)
 }
 
 export default postSaga;

@@ -7,8 +7,8 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   queryText = `SELECT * FROM "post"
-  WHERE "user_id" = 1;`;
-  pool.query(queryText)
+  WHERE "user_id" = $1;`;
+  pool.query(queryText, [req.user.id])
   .then((result) => {
     console.log('GET successful')
     res.send(result.rows)
@@ -17,6 +17,18 @@ router.get('/', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+router.get('/details/:id', (req, res) => {
+    queryText = `SELECT * FROM "post" WHERE "id" = $1;`;
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
+        console.log('GET details success')
+        res.send(result.rows)
+    }).catch((error) => {
+        console.error('GET details error', error)
+        res.sendStatus(500);
+    })
+})
 
 /**
  * POST route template
