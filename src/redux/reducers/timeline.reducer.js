@@ -1,6 +1,6 @@
-const postReducer = (state = {}, action) => {
+const timelineReducer = (state = {}, action) => {
     switch (action.type) {
-      case 'SET_POSTS':
+      case 'SET_TIMELINE':
         return action.payload;
     //   case 'SET_POSTS':
     //     return action.payload;
@@ -10,5 +10,4 @@ const postReducer = (state = {}, action) => {
   };
   
 
-  export default postReducer;
-  
+  export default timelineReducer;

@@ -4,24 +4,20 @@ import {useSelector} from 'react-redux';
 import axios from 'axios';
 import PostsPage from '../PostsPage/PostsPage';
 import PostInput from '../PostInput/PostInput';
+import {useDispatch} from 'react-redux';
 
 function UserPage() {
-
+  const dispatch = useDispatch();
   const [timeline, setTimeline] = useState([])
+  const post = useSelector(store => store.post)
 
-  const getTimeline = () => {
-    axios.get('/api/post').then((response) => {
-      console.log(response.data)
-      setTimeline(response.data);
-    }).catch((error) => {
-      console.error('Problem fetching timeline', error)
-      alert('Something went wrong');
-    })
+  const getTimelinePosts = () => {
+    dispatch({type: 'FETCH_POSTS'})
   }
 
 
   useEffect(() => {
-    getTimeline();
+    getTimelinePosts();
   }, []);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -31,9 +27,11 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <br />
       <PostInput />
+      {JSON.stringify(post)}
+      {JSON.stringify(timeline)}
       <ul>
-        {timeline.map((post) => {
-          return <li><PostsPage key={post.id} post={post}/></li>
+        {post.map((item) => {
+          return <li><PostsPage key={item.id} post={item}/></li>
         })}
       </ul>
       

@@ -11,19 +11,19 @@ function* addPost(action) {
     }
   }
 
-// function* fetchPosts() {
-//     try {
-//         const response = yield axios.get('/api/post');
-//         const action = { type: 'SET_POSTS', payload: response.data}
-//         yield put(action);
-//     } catch (error) {
-//         console.log('Error with fetch', error)
-//         alert('Something went wrong');
-//     }
-// }
+function* fetchPosts() {
+    try {
+        const response = yield axios.get('/api/post');
+        const action = { type: 'SET_POSTS', payload: response.data}
+        yield put(action);
+    } catch (error) {
+        console.log('Error with fetch', error)
+        alert('Something went wrong');
+    }
+}
 
 function* postSaga() {
-    // yield takeLatest('FETCH_POSTS', fetchPosts);
+    yield takeLatest('FETCH_POSTS', fetchPosts);
     yield takeLatest('ADD_POST', addPost);
 }
 
