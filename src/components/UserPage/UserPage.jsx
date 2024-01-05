@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useDispatch, useSelector} from 'react-redux';
-import axios from 'axios';
 import PostsPage from '../PostsPage/PostsPage';
 import PostInput from '../PostInput/PostInput';
 
@@ -26,7 +25,6 @@ function UserPage() {
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
-      <h3>{JSON.stringify(details)}</h3>
       <br />
       <PostInput />
       <ul>

@@ -20,6 +20,7 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import TimelinePage from '../TimelinePage/TimelinePage';
+import DetailsPage from '../DetailsPage/DetailsPage';
 import './App.css';
 
 function App() {
@@ -121,6 +122,10 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+
+          <Route exact path="/details/:id">
+            {user.id ? <DetailsPage/> : <LandingPage />}
           </Route>
 
           {/* If none of the other routes matched, we will show a 404. */}
