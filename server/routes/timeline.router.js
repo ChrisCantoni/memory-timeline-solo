@@ -24,4 +24,17 @@ router.post('/', (req, res) => {
   // POST route code here
 });
 
+// DELETE Route
+router.delete('/:id', (req, res) => {
+    let queryText = `DELETE FROM "timeline" WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id])
+    .then((result) => {
+        res.sendStatus(201)
+    }).catch((err) => {
+        console.error('deletion error', err)
+        res.sendStatus(500)
+    })
+})
+
+
 module.exports = router;

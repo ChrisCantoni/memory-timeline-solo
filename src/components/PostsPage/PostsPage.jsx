@@ -2,7 +2,7 @@
 
 function PostsPage(props) {
 
-    const imagePost = '.com'
+    const imagePost = 'http'
 
     return (
         <div className="postItem">

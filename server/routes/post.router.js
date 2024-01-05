@@ -22,7 +22,6 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  // POST route code here
   queryText = `INSERT INTO "post" ("title", "media_url", "date", "date_created", "user_id", "timeline_id")
   VALUES (
     $1, $2, $3, CURRENT_TIMESTAMP, $4, $5
@@ -35,5 +34,17 @@ router.post('/', (req, res) => {
     res.sendStatus(500);
   })
 });
+// DELETE route
+router.delete('/:id', (req, res) => {
+    let queryText = `DELETE FROM "post" WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id])
+    .then((result) => {
+        res.sendStatus(201)
+    }).catch((err) => {
+        console.error('deletion error', err)
+        res.sendStatus(500)
+    })
+})
+
 
 module.exports = router;

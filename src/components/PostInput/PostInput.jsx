@@ -41,7 +41,7 @@ function PostInput() {
         e.preventDefault();
         console.log(newPost)
         dispatch({type: 'ADD_POST', payload: newPost});
-        setNewPost({title: '', description: '', date: newTime})
+        setNewPost({title: '', description: '', date: newTime, timeline: 1})
     }
 
     return (
