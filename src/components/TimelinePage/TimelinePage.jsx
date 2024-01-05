@@ -1,33 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import TimelineItem from '../TimelineItem/TimelineItem.jsx';
+import {useDispatch, useSelector} from 'react-redux';
 
 function TimelinePage() {
 
-    const [timelines, setTimelines] = useState([])
+    const dispatch = useDispatch();
+    const timelinesList = useSelector(store => store.timelines)
+    
 
     const getTimelines = () => {
-        axios.get('/api/timeline').then((response) => {
-            console.log(response.data)
-            setTimelines(response.data)
-        }).catch((error) => {
-            console.error("Problem fecthing timelines", error)
-            alert("Something went wrong");
-        })
+        dispatch({type: 'FETCH_TIMELINES'})
     }
 
     useEffect(() => {
         getTimelines();
     }, []);
 
+    
+
     return (
         <>
         <h1>This is the Timelines page</h1>
+        {JSON.stringify(timelinesList)}
         <ul>   
-            {timelines.map((item) => {
+            {timelinesList.map((item) => {
                 return <li><TimelineItem key={item.id} item={item}/></li>
             })}
         </ul>
+        <button>Add a new Timeline</button>
         </>
     )
 }

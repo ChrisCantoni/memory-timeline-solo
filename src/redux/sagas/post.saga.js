@@ -6,7 +6,7 @@ function* addPost(action) {
       yield axios.post('/api/post', action.payload);
       yield put({type: 'FETCH_POSTS'})
     } catch (error) {
-      console.log('Error adding plant', error)
+      console.log('Error adding post', error)
       alert('Something went wrong!');
     }
   }

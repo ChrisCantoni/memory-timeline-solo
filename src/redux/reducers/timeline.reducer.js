@@ -1,8 +1,8 @@
-const timelineReducer = (state = {}, action) => {
+const timelineReducer = (state = [], action) => {
     switch (action.type) {
-      case 'SET_TIMELINE':
+      case 'SET_TIMELINES':
         return action.payload;
-    //   case 'SET_POSTS':
+    //   case 'SET_TIMELINE':
     //     return action.payload;
       default:
         return state;

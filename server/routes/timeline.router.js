@@ -7,8 +7,8 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   queryText = `SELECT * FROM "timeline"
-  WHERE "user_id" = 1;`;
-  pool.query(queryText).then((result) => {
+  WHERE "user_id" = $1;`;
+  pool.query(queryText, [req.user.id]).then((result) => {
     console.log('GET timeline success')
     res.send(result.rows);
   }).catch((err) => {

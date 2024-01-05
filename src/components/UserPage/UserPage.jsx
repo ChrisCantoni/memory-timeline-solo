@@ -8,16 +8,16 @@ import {useDispatch} from 'react-redux';
 
 function UserPage() {
   const dispatch = useDispatch();
-  const [timeline, setTimeline] = useState([])
+  // const [timeline, setTimeline] = useState([])
   const post = useSelector(store => store.post)
 
-  const getTimelinePosts = () => {
+  const getPosts = () => {
     dispatch({type: 'FETCH_POSTS'})
   }
 
 
   useEffect(() => {
-    getTimelinePosts();
+    getPosts();
   }, []);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -28,7 +28,7 @@ function UserPage() {
       <br />
       <PostInput />
       {JSON.stringify(post)}
-      {JSON.stringify(timeline)}
+      {/* {JSON.stringify(timeline)} */}
       <ul>
         {post.map((item) => {
           return <li><PostsPage key={item.id} post={item}/></li>
