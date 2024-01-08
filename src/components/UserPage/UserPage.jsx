@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import {useDispatch, useSelector} from 'react-redux';
 import PostsPage from '../PostsPage/PostsPage';
-import PostInput from '../PostInput/PostInput';
+import { Link } from 'react-router-dom';
 
 
 function UserPage() {
@@ -26,13 +26,12 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />
-      <PostInput />
       <ul>
         {post.map((item) => {
           return <li><PostsPage key={item.id} post={item}/></li>
         })}
       </ul>
-      
+      <Link to={'/addpost'}><button>Add New Post</button></Link>
     </div>
   );
 }

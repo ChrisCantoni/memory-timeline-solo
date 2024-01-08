@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
+import {useHistory} from 'react-router-dom';
 
 function PostInput() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const timelineList = useSelector(store => store.timelines)
 
@@ -42,6 +44,7 @@ function PostInput() {
         console.log(newPost)
         dispatch({type: 'ADD_POST', payload: newPost});
         setNewPost({title: '', description: '', date: newTime, timeline: 1})
+        history.push('/user');
     }
 
     return (
