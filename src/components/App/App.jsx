@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import TimelinePage from '../TimelinePage/TimelinePage';
 import DetailsPage from '../DetailsPage/DetailsPage';
+import AddTimeline from '../AddTimeline/AddTimeline';
 import './App.css';
 
 function App() {
@@ -122,6 +123,9 @@ function App() {
               // Otherwise, show the Landing page
               <LandingPage />
             }
+          </Route>
+          <Route exact path ="/addtimeline">
+          {user.id ? <AddTimeline/> : <LandingPage />}
           </Route>
 
           <Route exact path="/details/:id">

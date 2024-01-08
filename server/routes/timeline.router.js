@@ -21,8 +21,18 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-  
-});
+    queryText = `INSERT INTO "timeline" ("title", "date_created", "user_id")
+    VALUES (
+      $1, $2, $3
+    );`
+    pool.query(queryText, [req.body.title, req.body.date, req.user.id])
+    .then((result) => {
+      res.sendStatus(201)
+    }).catch((e) => {
+      console.error(e);
+      res.sendStatus(500);
+    })
+  });
 
 // DELETE Route
 router.delete('/:id', (req, res) => {

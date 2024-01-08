@@ -19,8 +19,10 @@ router.get('/', (req, res) => {
 });
 
 router.get('/details/:id', (req, res) => {
-    queryText = `SELECT * FROM "post" WHERE "id" = $1;`;
-    pool.query(queryText, [req.params.id])
+    queryText = `SELECT "post".*, "timeline"."title" AS "timeline_title" FROM "post"
+    JOIN "timeline" ON "timeline"."id" = "post"."timeline_id"
+    WHERE "post"."user_id" = $1 AND "post"."id" = $2;`;
+    pool.query(queryText, [req.user.id, req.params.id])
     .then((result) => {
         console.log('GET details success')
         res.send(result.rows)

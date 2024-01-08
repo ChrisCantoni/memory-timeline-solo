@@ -28,23 +28,18 @@ function DetailsPage() {
 
     return (
         <>
+        {JSON.stringify(details)}
         {details.map((post) => {
         return (
             <div className="postDetails" key={details.id}>
             {post.title}<br/>
             {post.media_url.includes(imagePost) ? <img src={post.media_url} width={800}/> : <p>{post.media_url}</p>}<br/>
             {post.notes}
+            <br/>
+            Timeline: {post.timeline_title}
             </div>
         )
 })}
-        {/* <div className="postItem" onClick={() => handleDetails(details.id)}>
-            {details.map((item) => {
-                {item.title} <br/> 
-                {item.media_url.includes(imagePost) ? <img src={item.media_url} width={500}/> : <p>{item.media_url}</p>}
-                <br/>
-                <small>{item.notes}</small>
-            })}
-        </div> */}
         </>
     )
 }
