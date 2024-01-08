@@ -11,6 +11,16 @@ function* addPost(action) {
     }
   }
 
+function* deletePost(action) {
+    try {
+        yield axios.delete(`/api/post/${action.payload}`);
+        yield put({type: 'FETCH_POSTS'})
+    } catch (error) {
+        console.log('Error deleting post', error)
+        alert('Something went wrong')
+    }
+}
+
 function* fetchDetails(action) {
     try {
         const response = yield axios.get(`/api/post/details/${action.payload}`);
@@ -35,7 +45,8 @@ function* fetchPosts() {
 function* postSaga() {
     yield takeLatest('FETCH_POSTS', fetchPosts);
     yield takeLatest('ADD_POST', addPost);
-    yield takeLatest('FETCH_DETAILS', fetchDetails)
+    yield takeLatest('DELETE_POST', deletePost);
+    yield takeLatest('FETCH_DETAILS', fetchDetails);
 }
 
 export default postSaga;

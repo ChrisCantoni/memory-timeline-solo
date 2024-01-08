@@ -1,9 +1,10 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 
 function DetailsPage() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
 
@@ -20,15 +21,20 @@ function DetailsPage() {
         dispatch({type: 'FETCH_DETAILS', payload: id})
     }
 
+    const deletePost = () => {
+        dispatch({type: 'DELETE_POST', payload: id})
+        history.push('/user');
+    }
+
     useEffect(() => {
         refreshPage();
     }, [])
 
-    // TODO: MAP over details. It's an array.
+    // TODO: DELETE function
+    // TODO: Add warning pop-up!
 
     return (
         <>
-        {JSON.stringify(details)}
         {details.map((post) => {
         return (
             <div className="postDetails" key={details.id}>
@@ -37,6 +43,7 @@ function DetailsPage() {
             {post.notes}
             <br/>
             Timeline: {post.timeline_title}
+            <button onClick={deletePost}>Delete Post</button>
             </div>
         )
 })}
