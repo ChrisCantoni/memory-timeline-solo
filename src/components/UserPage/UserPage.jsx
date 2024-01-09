@@ -27,7 +27,7 @@ function UserPage() {
       <br />
       <ul>
         {post.map((item, i) => {
-          return <li><PostsPage key={i} post={item}/></li>
+          return <li key={i}><PostsPage post={item}/></li>
         })}
       </ul>
       <Link to={'/addpost'}><button>Add New Post</button></Link>

@@ -13,13 +13,19 @@ function DetailsPage() {
     const details = useSelector(store => store.details)
     let [newDetails, setNewDetails] = useState({title: details.title, media_url: details.media_url, 
         date: details.date, timeline: details.timeline})
-    const [isError, setIsError] = useState(false)
+    const [isImage, setIsImage] = useState(true)
     
 
     const refreshPage = () => {
-        console.log(id)
         dispatch({type: 'FETCH_DETAILS', payload: id})
     }
+
+    const checkImage = () => {
+        if (details.media_url == undefined) {
+            return;
+        } else if (details.media_url.indexOf('http') === -1) {
+            setIsImage(false)
+        }};
 
     const deletePost = () => {
         Swal.fire({
@@ -48,8 +54,6 @@ function DetailsPage() {
         console.log('new details', newDetails)
         dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
         setToggleEditDetails(false)
-        // setTimeout(refreshPage, 1000);
-        
     }
 
     const handleTitleChange = (e) => {
@@ -58,6 +62,7 @@ function DetailsPage() {
 
     useEffect(() => {
         refreshPage();
+        checkImage();
     }, [])
 
     // TODO: Add warning pop-up!
@@ -65,10 +70,9 @@ function DetailsPage() {
     return (
         <>
             <div className="postDetails" key={details.id}>
-                {JSON.stringify(details)}
             {toggleEditDetails === false ? 
             <h2>{details.title}</h2> : <input type='text' value={newDetails.title} onChange={handleTitleChange}/>}<br/>
-            {!isError ? <img onError={() => setIsError(true)} src={details.media_url} width={800}/> : <p>{details.media_url}</p>}<br/>
+            {!isImage ? <p>{details.media_url}</p> : <img src={details.media_url} width={800}/> }<br/>
             {details.notes}
             <br/>
             Timeline: {details.timeline_title}

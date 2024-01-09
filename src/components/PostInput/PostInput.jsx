@@ -91,7 +91,7 @@ function PostInput() {
                     onChange={onFileChange}
                     />
                 <label>Description:</label>
-                <input type='text' value={newPost.notes} onChange={handleDescChange}/>
+                <input type='text' value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 <label>Date:</label>
                 <input type='datetime-local' value={newTime} onChange={handleDateChange}/>
                 {/* Dropdown with timelines to select one */}
