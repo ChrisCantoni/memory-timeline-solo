@@ -5,7 +5,6 @@ import axios from 'axios';
 function PhotoUpload() {
 
     let [imagePath, setImagePath] = useState('');
-    let [imageList, setImageList] = useState([]);
 
   const onFileChange = async (event) => {
     // Access the selected file
@@ -24,7 +23,7 @@ function PhotoUpload() {
         console.log('Success!', response);
         setImagePath(response.data.url);
       }).catch(error => {
-        console.log('error', error);Photo
+        console.log('error', error);
         alert('Something went wrong');
       })
     } else {

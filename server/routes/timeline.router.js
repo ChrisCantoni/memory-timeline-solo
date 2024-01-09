@@ -36,7 +36,10 @@ router.post('/', (req, res) => {
 
 // DELETE Route
 router.delete('/:id', (req, res) => {
-    let queryText = `DELETE FROM "timeline" WHERE "id" = $1 AND "user_id" = $2;`;
+  //! THIS MUST DELETE ALL POSTS WITH THE TIMELINE ID FOR IT TO WORK
+    let queryText = `DELETE FROM "timeline"
+    JOIN "post" ON "timeline"."id" = "post"."timeline_id"
+    WHERE "id" = $1 AND "user_id" = $2;`;
     pool.query(queryText, [req.params.id, req.user.id])
     .then((result) => {
         res.sendStatus(201)
