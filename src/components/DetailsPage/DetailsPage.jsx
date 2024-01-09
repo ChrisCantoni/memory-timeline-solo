@@ -14,12 +14,11 @@ function DetailsPage() {
     let [newDetails, setNewDetails] = useState({title: details.title, media_url: details.media_url, 
         date: details.date, timeline: details.timeline})
     const [isError, setIsError] = useState(false)
-    const imagePost = 'http';
+    
 
     const refreshPage = () => {
         console.log(id)
         dispatch({type: 'FETCH_DETAILS', payload: id})
-        setIsError(false);
     }
 
     const deletePost = () => {
@@ -47,8 +46,10 @@ function DetailsPage() {
 
     const sendEdittoServer = () => {
         console.log('new details', newDetails)
-        dispatch({ type: 'EDIT_DETAILS', payload: newDetails})
-        refreshPage();
+        dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
+        setToggleEditDetails(false)
+        // setTimeout(refreshPage, 1000);
+        
     }
 
     const handleTitleChange = (e) => {

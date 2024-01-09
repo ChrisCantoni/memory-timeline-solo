@@ -12,7 +12,7 @@ function PostInput() {
 
     let currentDate = new Date();
     let newTime = currentDate.toISOString().slice(0, 16);
-    let [newPost, setNewPost] = useState({title: '', description: '', date: newTime, timeline: 1})
+    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: newTime, timeline: 1})
 
     const getTimelines = () => {
         dispatch({type: 'FETCH_TIMELINES'})
@@ -52,7 +52,13 @@ function PostInput() {
     }
 
     const handleDescChange = (e) => {
-        setNewPost({...newPost, description: e.target.value})
+        if (!newPost.description.includes('http')) {
+            console.log('we are in description')
+            setNewPost({...newPost, description: e.target.value})
+        } else {
+            console.log('we are in notes')
+            setNewPost({...newPost, notes: e.target.value})
+        }
     }
 
     const handleDateChange = (e) => {
@@ -69,7 +75,7 @@ function PostInput() {
         e.preventDefault();
         console.log(newPost)
         dispatch({type: 'ADD_POST', payload: newPost});
-        setNewPost({title: '', description: '', date: newTime, timeline: 1})
+        setNewPost({title: '', description: '', notes: '', date: newTime, timeline: 1})
         history.push('/user');
     }
 
@@ -85,7 +91,7 @@ function PostInput() {
                     onChange={onFileChange}
                     />
                 <label>Description:</label>
-                <input type='text' value={newPost.description} onChange={handleDescChange}/>
+                <input type='text' value={newPost.notes} onChange={handleDescChange}/>
                 <label>Date:</label>
                 <input type='datetime-local' value={newTime} onChange={handleDateChange}/>
                 {/* Dropdown with timelines to select one */}

@@ -24,7 +24,6 @@ router.get('/details/:id', (req, res) => {
     WHERE "post"."user_id" = $1 AND "post"."id" = $2;`;
     pool.query(queryText, [req.user.id, req.params.id])
     .then((result) => {
-        console.log(result.rows);
         console.log('GET details success')
         res.send(result.rows.length > 0 ? result.rows[0] : {})
     }).catch((error) => {
@@ -37,6 +36,7 @@ router.get('/details/:id', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
+    if (req.body.notes === '') {
   queryText = `INSERT INTO "post" ("title", "media_url", "date", "date_created", "user_id", "timeline_id")
   VALUES (
     $1, $2, $3, CURRENT_TIMESTAMP, $4, $5
@@ -47,11 +47,23 @@ router.post('/', (req, res) => {
   }).catch((e) => {
     console.error(e);
     res.sendStatus(500);
+  })}
+  else {
+    queryText = `INSERT INTO "post" ("title", "media_url", "notes", "date", "date_created", "user_id", "timeline_id")
+  VALUES (
+    $1, $2, $3, $4, CURRENT_TIMESTAMP, $5, $6
+  );`
+  pool.query(queryText, [req.body.title, req.body.description, req.body.notes, req.body.date, req.user.id, req.body.timeline])
+  .then((result) => {
+    res.sendStatus(201)
+  }).catch((e) => {
+    console.error(e);
+    res.sendStatus(500);
   })
+  }
 });
 
 router.put('/:id', (req, res) => {
-    console.log('PUT request', req.body.title)
     let queryText = `UPDATE "post"
     SET "title" = $1, "media_url" = $2
     WHERE "id" = $3 AND "user_id" = $4;
