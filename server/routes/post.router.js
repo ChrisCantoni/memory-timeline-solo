@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   queryText = `SELECT * FROM "post"
-  WHERE "user_id" = $1;`;
+  WHERE "user_id" = $1 ORDER BY "date";`;
   pool.query(queryText, [req.user.id])
   .then((result) => {
     console.log('GET successful')

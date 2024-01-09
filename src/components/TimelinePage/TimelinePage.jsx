@@ -20,7 +20,7 @@ function TimelinePage() {
     const handleDeleteTimeline = (id) => {
         Swal.fire({
             title: "Are you sure?",
-            text: "You won't be able to revert this!",
+            text: "All posts on this timeline will also be deleted",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -48,7 +48,6 @@ function TimelinePage() {
     return (
         <>
         <h1>This is the Timelines page</h1>
-        {JSON.stringify(timelinesList)}
         <ul>   
             {timelinesList.map((item) => {
                 return <li><TimelineItem key={item.id} item={item}/> <Button variant="contained" onClick={() => handleDeleteTimeline(item.id)}>Delete Timeline</Button></li>

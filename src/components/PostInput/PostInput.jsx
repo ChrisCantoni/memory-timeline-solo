@@ -53,10 +53,8 @@ function PostInput() {
 
     const handleDescChange = (e) => {
         if (!newPost.description.includes('http')) {
-            console.log('we are in description')
             setNewPost({...newPost, description: e.target.value})
         } else {
-            console.log('we are in notes')
             setNewPost({...newPost, notes: e.target.value})
         }
     }

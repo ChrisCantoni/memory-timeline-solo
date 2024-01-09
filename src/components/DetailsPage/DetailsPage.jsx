@@ -22,21 +22,30 @@ function DetailsPage() {
 
     const refreshPage = () => {
         dispatch({type: 'FETCH_DETAILS', payload: id})
+        // setIsImage(false);
     }
 
     const checkImage = () => {
+        console.log(details.media_url)
         if (details.media_url == undefined) {
             return;
         } else if (details.media_url.indexOf('http') === -1) {
+            console.log('Setting isImage to false')
             setIsImage(false)
-        }};
+        } else {
+            setIsImage(true);
+        }
+    
+    };
 
     const editDetails = () => {
+        console.log(isImage);
         setToggleEditDetails(!toggleEditDetails);
         dispatch({type: 'FETCH_TIMELINES'})
         setNewDetails({
             title: details.title, 
-            media_url: details.media_url, 
+            media_url: details.media_url,
+            notes: details.notes, 
             date: details.date, 
             timeline: details.timeline
         });
@@ -101,6 +110,10 @@ function DetailsPage() {
     const handleTitleChange = (e) => {
         setNewDetails({...newDetails, title: e.target.value});
     }
+
+    const handleNotesChange = (e) => {
+        setNewDetails({...newDetails, notes: e.target.value});
+    }
     const handleTimelineSelect = (e) => {
         console.log(e.target.value);
         setNewDetails({...newDetails, timeline: e.target.value});
@@ -108,38 +121,46 @@ function DetailsPage() {
 
     useEffect(() => {
         refreshPage();
-        checkImage();
     }, [])
+    useEffect(() => {
+        checkImage();
+    }, [details])
 
-    // TODO: Add warning pop-up!
 
     return (
         <>
             <div className="postDetails" key={details.id}>
                 {toggleEditDetails === false ? 
-                    <h2>{details.title}</h2> : <><h2>Title: {newDetails.title}</h2><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></>}
+                    <h2>{details.title}</h2> : 
+                    <><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></>
+                }
                 <br/>
-                    {!isImage ? <p>{details.media_url}</p> : <img src={details.media_url} width={800}/> }
-                    {toggleEditDetails === true ? <div><label>Photo upload:</label>
-                        <input
-                        type="file"
-                        accept="image/*"
-                        onChange={onFileChange}
-                        />
-                    </div> : <></>}
+                {details.media_url != undefined && !isImage ? <>{toggleEditDetails === false ? <p>{details.media_url}</p> : <TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/>}</> : <img src={details.media_url} width={800}/>}
+                {toggleEditDetails === true ? <div><label>Photo upload:</label>
+                    <input
+                    type="file"
+                    accept="image/*"
+                    onChange={onFileChange}
+                    />
+                    </div> : 
+                    <></>
+                }
                 <br/>
-                    {details.notes}
+                {toggleEditDetails === false ? 
+                    <p>Notes: {details.notes} </p> : <TextField type='text' sx={{width: 400}} defaultValue={newDetails.notes} onChange={handleNotesChange}/>
+                }
                 <br/>
                     Timeline: {details.timeline_title}
                     {toggleEditDetails === true ? 
-                    <div>
-                        <label>Choose a timeline:</label>
-                        <select name='timelines' value={newDetails.timeline} onChange={handleTimelineSelect}>
-                        <option value="none" defaultValue disabled hidden>Select a Timeline</option>
-                        {timelineList.map((item, i) => (
-                            <option key={i} value={item.id}>{item.id}. {item.title}</option>))}
-                        </select>
-                    </div> : <></>}
+                        <div>
+                            <label>Choose a timeline:</label>
+                            <select name='timelines' value={newDetails.timeline} onChange={handleTimelineSelect}>
+                            <option value="none" defaultValue disabled hidden>Select a Timeline</option>
+                            {timelineList.map((item, i) => (
+                                <option key={i} value={item.id}>{item.id}. {item.title}</option>))}
+                            </select>
+                        </div> : <></>
+                    }
 
                 <button onClick={deletePost}>Delete Post</button>
 
@@ -148,7 +169,8 @@ function DetailsPage() {
                     <div>
                         <button onClick={() => editDetails()}>Cancel</button>
                         <button onClick={sendEdittoServer}>Save Changes</button>
-                    </div>}
+                    </div>
+                }
              
             </div>
         </>
