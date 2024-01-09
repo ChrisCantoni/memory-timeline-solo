@@ -9,7 +9,6 @@ function UserPage() {
   const dispatch = useDispatch();
   // const [timeline, setTimeline] = useState([])
   const post = useSelector(store => store.post)
-  const details = useSelector(store => store.details)
 
   const getPosts = () => {
     dispatch({type: 'FETCH_POSTS'})
@@ -27,8 +26,8 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <br />
       <ul>
-        {post.map((item) => {
-          return <li><PostsPage key={item.id} post={item}/></li>
+        {post.map((item, i) => {
+          return <li><PostsPage key={i} post={item}/></li>
         })}
       </ul>
       <Link to={'/addpost'}><button>Add New Post</button></Link>

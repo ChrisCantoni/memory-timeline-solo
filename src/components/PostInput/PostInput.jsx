@@ -52,7 +52,9 @@ function PostInput() {
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                 <input type='text' value={newPost.title} onChange={handleTitleChange}/>
+                <label>URL/Text:</label>
                 <input type='text' value={newPost.description} onChange={handleDescChange}/>
+                <label>Date:</label>
                 <input type='datetime-local' value={newTime} onChange={handleDateChange}/>
                 {/* Dropdown with timelines to select one */}
                 <label>Choose a timeline:</label>

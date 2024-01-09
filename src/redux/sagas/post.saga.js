@@ -21,9 +21,23 @@ function* deletePost(action) {
     }
 }
 
+function* editDetails(action) {
+    try {
+        console.log('editDetails action', action.payload.id)
+        yield axios.put(`/api/post/${action.payload.id}`, action.payload);
+        yield put({type: 'FETCH_DETAILS', payload: action.payload.id})
+        console.log(action.payload)
+    } catch (error) {
+        console.log('Error sending edit', error)
+        alert('Something went wrong');
+    }
+}
+
 function* fetchDetails(action) {
     try {
+        console.log('action is', action);
         const response = yield axios.get(`/api/post/details/${action.payload}`);
+        console.log('response is', response.data);
         yield put({type: 'SET_DETAILS', payload: response.data});
     } catch (error) {
         console.log('Could not fetch details', error)
@@ -47,6 +61,7 @@ function* postSaga() {
     yield takeLatest('ADD_POST', addPost);
     yield takeLatest('DELETE_POST', deletePost);
     yield takeLatest('FETCH_DETAILS', fetchDetails);
+    yield takeLatest('EDIT_DETAILS', editDetails);
 }
 
 export default postSaga;

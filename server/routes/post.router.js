@@ -24,8 +24,9 @@ router.get('/details/:id', (req, res) => {
     WHERE "post"."user_id" = $1 AND "post"."id" = $2;`;
     pool.query(queryText, [req.user.id, req.params.id])
     .then((result) => {
+        console.log(result.rows);
         console.log('GET details success')
-        res.send(result.rows)
+        res.send(result.rows.length > 0 ? result.rows[0] : {})
     }).catch((error) => {
         console.error('GET details error', error)
         res.sendStatus(500);
@@ -48,6 +49,24 @@ router.post('/', (req, res) => {
     res.sendStatus(500);
   })
 });
+
+router.put('/:id', (req, res) => {
+    console.log('PUT request', req.body.title)
+    let queryText = `UPDATE "post"
+    SET "title" = $1, "media_url" = $2
+    WHERE "id" = $3 AND "user_id" = $4;
+    `;
+    pool.query(queryText, [req.body.title, req.body.media_url, req.params.id, req.user.id])
+    .then((result) => {
+        console.log('put request made')
+        res.sendStatus(201)
+    }).catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
+    })
+})
+
+
 // DELETE route
 router.delete('/:id', (req, res) => {
     let queryText = `DELETE FROM "post" WHERE "id" = $1 AND "user_id" = $2;`;
