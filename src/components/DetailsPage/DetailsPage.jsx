@@ -54,8 +54,11 @@ function DetailsPage() {
             Timeline: {details.timeline_title}
             <button onClick={deletePost}>Delete Post</button>
             {toggleEditDetails === false ?
-            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Edit Details</button> :
-            <button onClick={sendEdittoServer}>Save Changes</button>}
+            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Edit Details</button> : 
+            <div>
+            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Cancel</button>
+            <button onClick={sendEdittoServer}>Save Changes</button>
+            </div>}
              
             </div>
         </>
