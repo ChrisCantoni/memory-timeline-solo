@@ -1,50 +1,66 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
-import {useParams} from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 
 function DetailsPage() {
 
+    const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
 
+    const [toggleEditDetails, setToggleEditDetails]  = useState(false);
     const details = useSelector(store => store.details)
-
+    let [newDetails, setNewDetails] = useState({title: details.title, media_url: details.media_url, 
+        date: details.date, timeline: details.timeline})
+    const [isError, setIsError] = useState(false)
     const imagePost = 'http';
 
-    // const handleDetails = (id) => {
-    //     console.log('You clicked on id #', id)
-    //     dispatch({type: 'FETCH_DETAILS', payload: id})
-    // }
-
     const refreshPage = () => {
+        console.log(id)
         dispatch({type: 'FETCH_DETAILS', payload: id})
+        setIsError(false);
+    }
+
+    const deletePost = () => {
+        dispatch({type: 'DELETE_POST', payload: id})
+        history.push('/user');
+    }
+
+    const sendEdittoServer = () => {
+        console.log('new details', newDetails)
+        dispatch({ type: 'EDIT_DETAILS', payload: newDetails})
+        refreshPage();
+    }
+
+    const handleTitleChange = (e) => {
+        setNewDetails({...details, title: e.target.value});
     }
 
     useEffect(() => {
         refreshPage();
     }, [])
 
-    // TODO: MAP over details. It's an array.
+    // TODO: Add warning pop-up!
 
     return (
         <>
-        {details.map((post) => {
-        return (
             <div className="postDetails" key={details.id}>
-            {post.title}<br/>
-            {post.media_url.includes(imagePost) ? <img src={post.media_url} width={800}/> : <p>{post.media_url}</p>}<br/>
-            {post.notes}
+                {JSON.stringify(details)}
+            {toggleEditDetails === false ? 
+            <h2>{details.title}</h2> : <input type='text' value={newDetails.title} onChange={handleTitleChange}/>}<br/>
+            {!isError ? <img onError={() => setIsError(true)} src={details.media_url} width={800}/> : <p>{details.media_url}</p>}<br/>
+            {details.notes}
+            <br/>
+            Timeline: {details.timeline_title}
+            <button onClick={deletePost}>Delete Post</button>
+            {toggleEditDetails === false ?
+            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Edit Details</button> : 
+            <div>
+            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Cancel</button>
+            <button onClick={sendEdittoServer}>Save Changes</button>
+            </div>}
+             
             </div>
-        )
-})}
-        {/* <div className="postItem" onClick={() => handleDetails(details.id)}>
-            {details.map((item) => {
-                {item.title} <br/> 
-                {item.media_url.includes(imagePost) ? <img src={item.media_url} width={500}/> : <p>{item.media_url}</p>}
-                <br/>
-                <small>{item.notes}</small>
-            })}
-        </div> */}
         </>
     )
 }
