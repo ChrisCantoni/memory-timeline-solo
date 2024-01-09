@@ -1,7 +1,9 @@
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import {useHistory, useParams} from 'react-router-dom';
+import axios from 'axios';
 import Swal from 'sweetalert2';
+import TextField from '@mui/material/TextField';
 
 function DetailsPage() {
 
@@ -10,10 +12,12 @@ function DetailsPage() {
     const { id } = useParams();
 
     const [toggleEditDetails, setToggleEditDetails]  = useState(false);
-    const details = useSelector(store => store.details)
-    let [newDetails, setNewDetails] = useState({title: details.title, media_url: details.media_url, 
-        date: details.date, timeline: details.timeline})
-    const [isImage, setIsImage] = useState(true)
+    const details = useSelector(store => store.details);
+    const timelineList = useSelector(store => store.timelines);
+
+    let [newDetails, setNewDetails] = useState({});
+
+    const [isImage, setIsImage] = useState(true);
     
 
     const refreshPage = () => {
@@ -26,6 +30,17 @@ function DetailsPage() {
         } else if (details.media_url.indexOf('http') === -1) {
             setIsImage(false)
         }};
+
+    const editDetails = () => {
+        setToggleEditDetails(!toggleEditDetails);
+        dispatch({type: 'FETCH_TIMELINES'})
+        setNewDetails({
+            title: details.title, 
+            media_url: details.media_url, 
+            date: details.date, 
+            timeline: details.timeline
+        });
+    };
 
     const deletePost = () => {
         Swal.fire({
@@ -50,14 +65,45 @@ function DetailsPage() {
         
     }
 
+    const onFileChange = async (event) => {
+        // Access the selected file
+        const fileToUpload = event.target.files[0];
+    
+        // Limit to specific file types.
+        const acceptedImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
+    
+        // Check if the file is one of the allowed types.
+        if (acceptedImageTypes.includes(fileToUpload.type)) {
+          const formData = new FormData();
+          formData.append('file', fileToUpload);
+          formData.append('upload_preset', process.env.REACT_APP_PRESET);
+          let postUrl = `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUD_NAME}/image/upload`;
+          axios.post(postUrl, formData).then(response => {
+            console.log('Success!', response);
+            setNewDetails({...newDetails, media_url: response.data.url});
+          }).catch(error => {
+            console.log('error', error);
+            alert('Something went wrong');
+          })
+        } else {
+          alert('Please select an image');
+        }
+      }
+
     const sendEdittoServer = () => {
         console.log('new details', newDetails)
         dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
-        setToggleEditDetails(false)
+        setToggleEditDetails(false);
+        setNewDetails({title: details.title, media_url: details.media_url, 
+            date: details.date, timeline: details.timeline});
     }
 
     const handleTitleChange = (e) => {
-        setNewDetails({...details, title: e.target.value});
+        setNewDetails({...newDetails, title: e.target.value});
+    }
+    const handleTimelineSelect = (e) => {
+        console.log(e.target.value);
+        setNewDetails({...newDetails, timeline: e.target.value});
     }
 
     useEffect(() => {
@@ -70,19 +116,39 @@ function DetailsPage() {
     return (
         <>
             <div className="postDetails" key={details.id}>
-            {toggleEditDetails === false ? 
-            <h2>{details.title}</h2> : <input type='text' value={newDetails.title} onChange={handleTitleChange}/>}<br/>
-            {!isImage ? <p>{details.media_url}</p> : <img src={details.media_url} width={800}/> }<br/>
-            {details.notes}
-            <br/>
-            Timeline: {details.timeline_title}
-            <button onClick={deletePost}>Delete Post</button>
-            {toggleEditDetails === false ?
-            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Edit Details</button> : 
-            <div>
-            <button onClick={() => setToggleEditDetails(!toggleEditDetails)}>Cancel</button>
-            <button onClick={sendEdittoServer}>Save Changes</button>
-            </div>}
+                {toggleEditDetails === false ? 
+                    <h2>{details.title}</h2> : <><h2>Title: {newDetails.title}</h2><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></>}
+                <br/>
+                    {!isImage ? <p>{details.media_url}</p> : <img src={details.media_url} width={800}/> }
+                    {toggleEditDetails === true ? <div><label>Photo upload:</label>
+                        <input
+                        type="file"
+                        accept="image/*"
+                        onChange={onFileChange}
+                        />
+                    </div> : <></>}
+                <br/>
+                    {details.notes}
+                <br/>
+                    Timeline: {details.timeline_title}
+                    {toggleEditDetails === true ? 
+                    <div>
+                        <label>Choose a timeline:</label>
+                        <select name='timelines' value={newDetails.timeline} onChange={handleTimelineSelect}>
+                        <option value="none" defaultValue disabled hidden>Select a Timeline</option>
+                        {timelineList.map((item, i) => (
+                            <option key={i} value={item.id}>{item.id}. {item.title}</option>))}
+                        </select>
+                    </div> : <></>}
+
+                <button onClick={deletePost}>Delete Post</button>
+
+                {toggleEditDetails === false ?
+                        <button onClick={() => editDetails()}>Edit Details</button> : 
+                    <div>
+                        <button onClick={() => editDetails()}>Cancel</button>
+                        <button onClick={sendEdittoServer}>Save Changes</button>
+                    </div>}
              
             </div>
         </>

@@ -9,6 +9,7 @@ function PostsPage(props) {
     const [isImage, setIsImage] = useState(true)
 
     const checkImage = () => {
+        dispatch({type: 'EMPTY_DETAILS'});
     if (props.post.media_url.indexOf('http') === -1) {
         setIsImage(false)
     }};

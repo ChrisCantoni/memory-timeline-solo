@@ -3,6 +3,8 @@ const detailsReducer = (state = {}, action) => {
       case 'SET_DETAILS':
         console.log('set details', action.payload);
         return action.payload;
+      case 'EMPTY_DETAILS':
+        return {};
       default:
         return state;
     }
