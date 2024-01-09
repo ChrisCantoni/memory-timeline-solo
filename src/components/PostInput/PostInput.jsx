@@ -53,10 +53,8 @@ function PostInput() {
 
     const handleDescChange = (e) => {
         if (!newPost.description.includes('http')) {
-            console.log('we are in description')
             setNewPost({...newPost, description: e.target.value})
         } else {
-            console.log('we are in notes')
             setNewPost({...newPost, notes: e.target.value})
         }
     }
@@ -99,7 +97,7 @@ function PostInput() {
                 <select name='timelines' value={newPost.timeline} onChange={handleTimelineSelect}>
                     <option value="none" defaultValue disabled hidden>Select a Timeline</option>
                     {timelineList.map((item, i) => (
-                        <option key={i} value={item.id}>{item.id}. {item.title}</option>))}
+                        <option key={i} value={item.id}>{i + 1}. {item.title}</option>))}
                 </select>
                 <button>Submit new post</button>
             </form>
