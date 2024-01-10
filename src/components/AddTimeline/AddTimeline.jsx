@@ -30,6 +30,7 @@ function AddTimeline() {
         <form onSubmit={handleSubmit}>
             <TextField type='text' value={newTimeline.title} label="Timeline Name" onChange={handleTitleChange}/>
             <br/>
+            <Button variant="contained" onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Cancel</Button>
             <Button type='submit' variant="contained">Create Timeline</Button>
         </form>
         </>

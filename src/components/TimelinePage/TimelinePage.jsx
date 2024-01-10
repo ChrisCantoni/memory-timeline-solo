@@ -5,12 +5,16 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Swal from 'sweetalert2';
+import { Dayjs } from 'dayjs';
+import TextField from '@mui/material/TextField';
+import AddTimeline from '../AddTimeline/AddTimeline.jsx';
 
 function TimelinePage() {
 
     const dispatch = useDispatch();
     const timelinesList = useSelector(store => store.timelines)
-    
+    let [newTimeline, setNewTimeline] = useState({title: '', date: Dayjs})
+    const [addTimelineToggle, setAddTimelineToggle] = useState(false);
 
     const getTimelines = () => {
         dispatch({type: 'FETCH_TIMELINES'})
@@ -35,8 +39,23 @@ function TimelinePage() {
               });
               dispatch({type: 'DELETE_TIMELINE', payload: id});
             }
-            });
-        
+            });   
+    }
+
+    const handleTitleChange = (e) => {
+        setNewTimeline({...newTimeline, title: e.target.value})
+    };
+
+    const handleCancel = () => {
+        setAddTimelineToggle(!addTimelineToggle);
+        setNewTimeline({title: '', date: Dayjs});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Button clicked', newTimeline)
+        dispatch({type: 'ADD_TIMELINE', payload: newTimeline})
+        setNewTimeline({title: '', date: Dayjs});
     }
 
     useEffect(() => {
@@ -53,7 +72,16 @@ function TimelinePage() {
                 return <li><TimelineItem key={item.id} item={item}/> <Button variant="contained" color="secondary" onClick={() => handleDeleteTimeline(item.id)}>Delete Timeline</Button></li>
             })}
         </ul>
-        <Link to={'/addtimeline'}><Button variant='contained' color="secondary">Add a new Timeline</Button></Link>
+        <Button variant='contained' color="secondary" onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button>
+        {addTimelineToggle ? 
+        <>
+          <form onSubmit={handleSubmit}>
+            <TextField type='text' value={newTimeline.title} label="Timeline Name" onChange={handleTitleChange}/>
+            <br/>
+            <Button variant="contained" onClick={handleCancel}>Cancel</Button>
+            <Button type='submit' variant="contained">Create Timeline</Button>
+          </form> 
+        </>: ''}
         </>
     )
 }
