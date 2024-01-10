@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
 
+
 function UserPage() {
   const dispatch = useDispatch();
   // const [timeline, setTimeline] = useState([])
@@ -33,11 +34,11 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   return (
     <>
-      {/* <div class="star-layers">
+      <div class="star-layers">
         <div class="star-layer" id="stars"></div>
         <div class="star-layer" id="stars2"></div>
         <div class="star-layer" id="stars3"></div>
-      </div> */}
+      </div>
     <div className="container">
       <h2>Welcome to your journey, {user.username}!</h2>
       <br />
