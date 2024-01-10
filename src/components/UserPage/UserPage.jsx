@@ -3,6 +3,7 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import {useDispatch, useSelector} from 'react-redux';
 import PostsPage from '../PostsPage/PostsPage';
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
 
 
 function UserPage() {
@@ -22,6 +23,12 @@ function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
+    <>
+      <div class="star-layers">
+        <div class="star-layer" id="stars"></div>
+        <div class="star-layer" id="stars2"></div>
+        <div class="star-layer" id="stars3"></div>
+      </div>
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />
@@ -30,8 +37,9 @@ function UserPage() {
           return <li key={i}><PostsPage post={item}/></li>
         })}
       </ul>
-      <Link to={'/addpost'}><button>Add New Post</button></Link>
+      <Link to={'/addpost'}><Button variant="contained" color="secondary">Add New Post</Button></Link>
     </div>
+  </>
   );
 }
 

@@ -21,7 +21,7 @@ function PostsPage(props) {
 
     useEffect(() => {
         checkImage();
-    }, []);
+    }, [props]);
 
     return (
         <div className="postItem" onClick={() => handleDetails(props.post.id)}>

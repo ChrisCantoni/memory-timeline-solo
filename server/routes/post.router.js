@@ -2,9 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-/**
- * GET route template
- */
+// GET Route
 router.get('/', (req, res) => {
   queryText = `SELECT * FROM "post"
   WHERE "user_id" = $1 ORDER BY "date";`;
@@ -18,6 +16,7 @@ router.get('/', (req, res) => {
   })
 });
 
+// GET Details Route
 router.get('/details/:id', (req, res) => {
     queryText = `SELECT "post".*, "timeline"."title" AS "timeline_title" FROM "post"
     JOIN "timeline" ON "timeline"."id" = "post"."timeline_id"
@@ -32,9 +31,7 @@ router.get('/details/:id', (req, res) => {
     })
 })
 
-/**
- * POST route template
- */
+// POST Route
 router.post('/', (req, res) => {
     if (req.body.notes === '') {
   queryText = `INSERT INTO "post" ("title", "media_url", "date", "date_created", "user_id", "timeline_id")
@@ -63,12 +60,14 @@ router.post('/', (req, res) => {
   }
 });
 
+// PUT Route
 router.put('/:id', (req, res) => {
+    console.log('Req Body', req.body)
     let queryText = `UPDATE "post"
-    SET "title" = $1, "media_url" = $2
-    WHERE "id" = $3 AND "user_id" = $4;
+    SET "title" = $1, "media_url" = $2, "notes" = $3
+    WHERE "id" = $4 AND "user_id" = $5;
     `;
-    pool.query(queryText, [req.body.title, req.body.media_url, req.params.id, req.user.id])
+    pool.query(queryText, [req.body.title, req.body.media_url, req.body.notes, req.params.id, req.user.id])
     .then((result) => {
         console.log('put request made')
         res.sendStatus(201)

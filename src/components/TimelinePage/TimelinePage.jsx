@@ -50,10 +50,10 @@ function TimelinePage() {
         <h1>This is the Timelines page</h1>
         <ul>   
             {timelinesList.map((item) => {
-                return <li><TimelineItem key={item.id} item={item}/> <Button variant="contained" onClick={() => handleDeleteTimeline(item.id)}>Delete Timeline</Button></li>
+                return <li><TimelineItem key={item.id} item={item}/> <Button variant="contained" color="secondary" onClick={() => handleDeleteTimeline(item.id)}>Delete Timeline</Button></li>
             })}
         </ul>
-        <Link to={'/addtimeline'}><Button variant='contained'>Add a new Timeline</Button></Link>
+        <Link to={'/addtimeline'}><Button variant='contained' color="secondary">Add a new Timeline</Button></Link>
         </>
     )
 }

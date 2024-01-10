@@ -4,6 +4,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 function DetailsPage() {
 
@@ -43,6 +44,7 @@ function DetailsPage() {
         setToggleEditDetails(!toggleEditDetails);
         dispatch({type: 'FETCH_TIMELINES'})
         setNewDetails({
+            id: id,
             title: details.title, 
             media_url: details.media_url,
             notes: details.notes, 
@@ -161,17 +163,17 @@ function DetailsPage() {
                             </select>
                         </div> : <></>
                     }
+                <div className="detailsButtons">
+                    <Button variant='contained' color='secondary' onClick={deletePost}>Delete Post</Button>
 
-                <button onClick={deletePost}>Delete Post</button>
-
-                {toggleEditDetails === false ?
-                        <button onClick={() => editDetails()}>Edit Details</button> : 
-                    <div>
-                        <button onClick={() => editDetails()}>Cancel</button>
-                        <button onClick={sendEdittoServer}>Save Changes</button>
-                    </div>
-                }
-             
+                    {toggleEditDetails === false ?
+                            <Button variant='contained' color='secondary' onClick={() => editDetails()}>Edit Details</Button> : 
+                        <div>
+                            <Button variant='contained' color='secondary' onClick={() => editDetails()}>Cancel</Button>
+                            <Button variant='contained' color='secondary' onClick={sendEdittoServer}>Save Changes</Button>
+                        </div>
+                    }
+                </div>
             </div>
         </>
     )
