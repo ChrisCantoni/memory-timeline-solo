@@ -106,7 +106,7 @@ function PostInput() {
                     {timelineList.map((item, i) => (
                         <MenuItem key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
                 </Select>
-                <Button variant="contained" color="secondary">Submit new post</Button>
+                <Button type="submit" variant="contained" color="secondary">Submit new post</Button>
             </form>
         </>
 
