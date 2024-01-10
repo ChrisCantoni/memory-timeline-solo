@@ -39,9 +39,8 @@ function UserPage() {
         <div class="star-layer" id="stars3"></div>
       </div> */}
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
+      <h2>Welcome to your journey, {user.username}!</h2>
       <br />
-      {JSON.stringify(timelineList)}
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
       <ul>
