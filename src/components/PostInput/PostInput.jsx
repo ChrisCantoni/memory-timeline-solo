@@ -3,6 +3,11 @@ import {useDispatch, useSelector} from 'react-redux';
 import moment from 'moment';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import InputLabel from '@mui/material/InputLabel';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 function PostInput() {
 
@@ -91,15 +96,17 @@ function PostInput() {
                 <label>Description:</label>
                 <input type='text' value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 <label>Date:</label>
-                <input type='datetime-local' value={newTime} onChange={handleDateChange}/>
+                   
+                    <DatePicker onchange={handleDateChange} />
+               
                 {/* Dropdown with timelines to select one */}
-                <label>Choose a timeline:</label>
-                <select name='timelines' value={newPost.timeline} onChange={handleTimelineSelect}>
-                    <option value="none" defaultValue disabled hidden>Select a Timeline</option>
+                <InputLabel id="select-timeline-dropdown">Select a timeline:</InputLabel>
+                <Select labelId="select-timeline-dropdown" label="Select a Timeline" name='timelines' value={newPost.timeline} onChange={handleTimelineSelect}>
+                    {/* <MenuItem value="none" defaultValue disabled hidden>Select a Timeline</MenuItem> */}
                     {timelineList.map((item, i) => (
-                        <option key={i} value={item.id}>{i + 1}. {item.title}</option>))}
-                </select>
-                <button>Submit new post</button>
+                        <MenuItem key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
+                </Select>
+                <Button variant="contained" color="secondary">Submit new post</Button>
             </form>
         </>
 
