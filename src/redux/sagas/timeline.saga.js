@@ -23,6 +23,16 @@ function* fetchTimelines() {
     }
 }
 
+function* setVisible(action) {
+    try {
+        yield axios.put(`/api/timeline/${action.payload}`);
+        yield put({type: 'FETCH_TIMELINES'});
+    } catch (error) {
+        console.log('Error updating timeline', error);
+        alert('Something went wrong')
+    }
+}
+
 function* deleteTimeline(action) {
     try {
         yield axios.delete(`/api/timeline/${action.payload}`);
@@ -36,6 +46,7 @@ function* deleteTimeline(action) {
 function* postSaga() {
     yield takeLatest('FETCH_TIMELINES', fetchTimelines);
     yield takeLatest('ADD_TIMELINE', addTimeline);
+    yield takeLatest('SET_VISIBLE', setVisible);
     yield takeLatest('DELETE_TIMELINE', deleteTimeline);
 }
 

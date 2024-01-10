@@ -10,9 +10,14 @@ function UserPage() {
   const dispatch = useDispatch();
   // const [timeline, setTimeline] = useState([])
   const post = useSelector(store => store.post)
+  const timelineList = useSelector(store => store.timelines);
 
   const getPosts = () => {
     dispatch({type: 'FETCH_POSTS'})
+  }
+
+  const getTimelines = () => {
+    dispatch({type: 'FETCH_TIMELINES'})
   }
 
 
@@ -20,18 +25,25 @@ function UserPage() {
     getPosts();
   }, []);
 
+  useEffect(() => {
+    getTimelines()
+  }, []);
+
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
   return (
     <>
-      <div class="star-layers">
+      {/* <div class="star-layers">
         <div class="star-layer" id="stars"></div>
         <div class="star-layer" id="stars2"></div>
         <div class="star-layer" id="stars3"></div>
-      </div>
+      </div> */}
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />
+      {JSON.stringify(timelineList)}
+      {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
+      <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
       <ul>
         {post.map((item, i) => {
           return <li key={i}><PostsPage post={item}/></li>

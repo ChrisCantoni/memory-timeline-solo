@@ -4,8 +4,9 @@ const router = express.Router();
 
 // GET Route
 router.get('/', (req, res) => {
-  queryText = `SELECT * FROM "post"
-  WHERE "user_id" = $1 ORDER BY "date";`;
+  queryText = `SELECT * FROM "post" 
+  JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
+  WHERE "post"."user_id" = $1 AND "timeline"."visible" = true ORDER BY "date";`;
   pool.query(queryText, [req.user.id])
   .then((result) => {
     console.log('GET successful')
