@@ -21,12 +21,12 @@ function PostsPage(props) {
 
     useEffect(() => {
         checkImage();
-    }, []);
+    }, [props]);
 
     return (
         <div className="postItem" onClick={() => handleDetails(props.post.id)}>
             <Link to={`/details/${props.post.id}`}>
-                {props.post.title} <br/> 
+                <h4>{props.post.post_title}</h4> <br/> 
                 {!isImage ? <p>{props.post.media_url}</p> : <img src={props.post.media_url} width={500}/> }<br/>
                 <small>{props.post.notes}</small>
             </Link>

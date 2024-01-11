@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   queryText = `SELECT * FROM "timeline"
-  WHERE "user_id" = $1;`;
+  WHERE "user_id" = $1 ORDER BY "date_created";`;
   pool.query(queryText, [req.user.id]).then((result) => {
     console.log('GET timeline success')
     res.send(result.rows);
@@ -33,6 +33,21 @@ router.post('/', (req, res) => {
       res.sendStatus(500);
     })
   });
+
+// PUT Route
+  router.put('/:id', (req, res) => {
+    let queryText = `UPDATE "timeline"
+    SET "visible" = NOT "visible"
+    WHERE "id" = $1 AND "user_id" = $2;`;
+    pool.query(queryText, [req.params.id, req.user.id])
+    .then((result) => {
+        console.log('put request made')
+        res.sendStatus(201)
+    }).catch((e) => {
+        console.error(e);
+        res.sendStatus(500);
+    })
+})
 
 // DELETE Route
 router.delete('/:id', (req, res) => {
