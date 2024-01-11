@@ -27,7 +27,7 @@ function UserPage() {
 
   useEffect(() => {
     getTimelines()
-  }, []);
+  }, [post]);
 
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -41,7 +41,6 @@ function UserPage() {
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />
-      {JSON.stringify(timelineList)}
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
       <ul>

@@ -56,12 +56,23 @@ function* fetchPosts() {
     }
 }
 
+// function* fetchSearch(action) {
+//     try {
+//         const response = yield axios.get(`/api/post?q=${action.payload}`);
+//         yield put({type: 'SET_POSTS', payload: response.data})
+//     } catch (error) {
+//         console.error('Search error', error)
+//         alert('Something went wrong')
+//     }
+// }
+
 function* postSaga() {
     yield takeLatest('FETCH_POSTS', fetchPosts);
     yield takeLatest('ADD_POST', addPost);
     yield takeLatest('DELETE_POST', deletePost);
     yield takeLatest('FETCH_DETAILS', fetchDetails);
     yield takeLatest('EDIT_DETAILS', editDetails);
+    // yield takeLatest('FETCH_SEARCH', fetchSearch)
 }
 
 export default postSaga;

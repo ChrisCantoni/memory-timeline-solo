@@ -4,7 +4,11 @@ const router = express.Router();
 
 // GET Route
 router.get('/', (req, res) => {
-  queryText = `SELECT * FROM "post" 
+  console.log('The Search params are', req.query.q)
+  let searchTerm = "%" + req.query.q + "%";
+  if (req.query.q == undefined) {
+    console.log('Normal GET function');
+  queryText = `SELECT "post".*, "timeline"."title" FROM "post" 
   JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
   WHERE "post"."user_id" = $1 AND "timeline"."visible" = true ORDER BY "date";`;
   pool.query(queryText, [req.user.id])
@@ -14,8 +18,22 @@ router.get('/', (req, res) => {
   }).catch((error) => {
     console.log('GET error', error)
     res.sendStatus(500);
-  })
-});
+  })}
+  else {
+    queryText = `SELECT "post".*, "timeline"."title"  FROM "post"
+    JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
+    WHERE "post"."user_id" = $1 AND "timeline"."visible" = true  AND 
+    "post"."post_title" ILIKE $2 OR "media_url" ILIKE $2 OR "notes" ILIKE $2 GROUP BY "post"."id"ORDER BY "date";`;
+  pool.query(queryText, [req.user.id, searchTerm])
+  .then((result) => {
+    console.log('GET successful')
+    res.send(result.rows)
+  }).catch((error) => {
+    console.log('GET error', error)
+    res.sendStatus(500);
+  })}
+  }
+);
 
 // GET Details Route
 router.get('/details/:id', (req, res) => {
