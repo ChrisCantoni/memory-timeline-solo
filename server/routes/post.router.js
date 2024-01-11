@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     queryText = `SELECT "post".*, "timeline"."title"  FROM "post"
     JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
     WHERE "post"."user_id" = $1 AND "timeline"."visible" = true  AND 
-    "post"."post_title" ILIKE $2 OR "media_url" ILIKE $2 OR "notes" ILIKE $2 GROUP BY "post"."id"ORDER BY "date";`;
+    "post"."post_title" ILIKE $2 OR "media_url" ILIKE $2 OR "notes" ILIKE $2 ORDER BY "date";`;
   pool.query(queryText, [req.user.id, searchTerm])
   .then((result) => {
     console.log('GET successful')
