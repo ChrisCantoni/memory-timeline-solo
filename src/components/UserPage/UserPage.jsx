@@ -48,13 +48,13 @@ function UserPage() {
       <br />
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
-      <VerticalTimeline lineColor={'#01CBAE'}>
+      <VerticalTimeline lineColor={'#04E2B7'}>
         {post.map((item, i) => {
           return <VerticalTimelineElement className="postTimelineElement" 
           date={moment(item.date).format('LL')}
-          contentStyle={{ background: '#01CBAE', color: '#fff' }}
+          contentStyle={{ background: '#8075FF', color: '#fff' }}
           iconStyle={{ background: '#3D007A'}}
-          icon={<FlareIcon fontSize='large' style={{color:'#01CBAE'}}/>}
+          icon={<FlareIcon fontSize='large' style={{color:'#04E2B7'}}/>}
           key={i}><PostsPage post={item}/></VerticalTimelineElement> 
         })}
       </VerticalTimeline>
