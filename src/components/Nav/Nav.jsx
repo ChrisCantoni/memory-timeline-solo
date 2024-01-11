@@ -46,9 +46,9 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
-            <Button onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "white"}}/></Button>
-              {toggleSearch ? <><TextField variant='filled' className='Noah' sx={{backgroundColor: 'white'}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
-              <Link className='navLink' to={`/search?=${searchTerm}`}><Button color='secondary' variant='contained' onClick={handleSubmit}>Submit</Button></Link></> : ''}
+            <Button className='navLink' onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "white"}}/></Button>
+              {toggleSearch ? <><TextField variant='filled' className='searchField' sx={{backgroundColor: 'white'}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
+              <Button color='secondary' variant='contained' onClick={handleSubmit}>Submit</Button></> : ''}
             <Link className="navLink" to="/user">
               <HomeIcon/>
             </Link>
