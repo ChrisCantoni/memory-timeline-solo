@@ -23,7 +23,6 @@ function DetailsPage() {
 
     const refreshPage = () => {
         dispatch({type: 'FETCH_DETAILS', payload: id})
-        // setIsImage(false);
     }
 
     const checkImage = () => {

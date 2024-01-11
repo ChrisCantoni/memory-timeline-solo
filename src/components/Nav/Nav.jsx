@@ -21,6 +21,7 @@ function Nav() {
     //Fetch posts that match user.id AND search term
     console.log(searchTerm);
     dispatch({type: 'FETCH_SEARCH', payload: searchTerm})
+    setToggleSearch(false);
   }
 
   return (
