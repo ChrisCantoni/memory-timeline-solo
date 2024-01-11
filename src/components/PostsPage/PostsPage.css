@@ -6,3 +6,10 @@ a {
   .container {
     background-color: white;
   }
+
+  .addPostBtn {
+    position:fixed !important; 
+    bottom: 0;
+    left: 50% !important;
+    margin-top:50% !important;
+  }

@@ -41,4 +41,25 @@
   background-color: #3D007A;
 }
 
+/* .MuiTextField-root {
+  padding-top: 50px;
+  padding-bottom: 10px;
+  background-color: white !important;
+} */
 
+.Noah {
+  height: 32px !important;
+  padding-top: 8px !important;
+  padding-bottom: 10px !important;
+  background-color: white !important;
+  color: white;
+}
+
+.MuiFormControl-root {
+  padding-top: 0px !important;
+  margin-top: 15px !important;
+}
+
+.MuiInputBase-input {
+  margin-bottom: 10px !important;
+}

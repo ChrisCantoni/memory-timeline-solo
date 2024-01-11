@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import PostsPage from '../PostsPage/PostsPage';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
+import '../PostsPage/PostsPage.css';
 
 
 function UserPage() {
@@ -48,7 +49,7 @@ function UserPage() {
           return <li key={i}><PostsPage post={item}/></li>
         })}
       </ul>
-      <Link to={'/addpost'}><Button variant="contained" color="secondary">Add New Post</Button></Link>
+      <Link to={'/addpost'}><Button className='addPostBtn' variant="contained" color="secondary">Add New Post</Button></Link>
     </div>
   </>
   );

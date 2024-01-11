@@ -6,6 +6,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import Button from '@mui/material/Button';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import LogoutIcon from '@mui/icons-material/Logout';
+
 
 function Nav() {
   const dispatch = useDispatch();
@@ -30,11 +34,7 @@ function Nav() {
         <h2 className="nav-title">StarGazer</h2>
       </Link>
       <div>
-      {user.id && (
-      <Button onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "white"}}/></Button>
-      )}
-      {toggleSearch ? <><TextField variant='filled' sx={{backgroundColor: 'white'}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
-      <Button color='secondary' variant='contained' onClick={handleSubmit}>Submit</Button></> : ''}
+      
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links
@@ -46,14 +46,17 @@ function Nav() {
         {/* If a user is logged in, show these links */}
         {user.id && (
           <>
+            <Button onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "white"}}/></Button>
+              {toggleSearch ? <><TextField variant='filled' className='Noah' sx={{backgroundColor: 'white'}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
+              <Link className='navLink' to={`/search?=${searchTerm}`}><Button color='secondary' variant='contained' onClick={handleSubmit}>Submit</Button></Link></> : ''}
             <Link className="navLink" to="/user">
-              Home
+              <HomeIcon/>
             </Link>
 
             
 
             <Link className="navLink" to="/info">
-              Info Page
+              <InfoIcon/>
             </Link>
 
             <Link className="navLink" to="/timelines">
