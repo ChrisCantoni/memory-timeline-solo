@@ -5,6 +5,10 @@ import PostsPage from '../PostsPage/PostsPage';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import '../PostsPage/PostsPage.css';
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import FlareIcon from '@mui/icons-material/Flare';
+import moment from 'moment';
 
 
 function UserPage() {
@@ -44,11 +48,16 @@ function UserPage() {
       <br />
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
-      <ul>
+      <VerticalTimeline lineColor={'#01CBAE'}>
         {post.map((item, i) => {
-          return <li key={i}><PostsPage post={item}/></li>
+          return <VerticalTimelineElement className="postTimelineElement" 
+          date={moment(item.date).format('LL')}
+          contentStyle={{ background: '#01CBAE', color: '#fff' }}
+          iconStyle={{ background: '#3D007A'}}
+          icon={<FlareIcon fontSize='large' style={{color:'#01CBAE'}}/>}
+          key={i}><PostsPage post={item}/></VerticalTimelineElement> 
         })}
-      </ul>
+      </VerticalTimeline>
       <Link to={'/addpost'}><Button className='addPostBtn' variant="contained" color="secondary">Add New Post</Button></Link>
     </div>
   </>

@@ -10,6 +10,19 @@ a {
   .addPostBtn {
     position:fixed !important; 
     bottom: 0;
-    left: 50% !important;
+    left: 45% !important;
     margin-top:50% !important;
   }
+
+  .imagePost {
+    object-fit: cover;
+    object-position: 25% 25%; 
+  }
+
+  /* .postItem {
+    background-color: #2082A6;
+  }
+
+  .postTimelineElement {
+    background-color: #2082A6;
+  } */
