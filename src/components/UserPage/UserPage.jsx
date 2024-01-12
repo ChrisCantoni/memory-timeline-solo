@@ -51,11 +51,12 @@ function UserPage() {
       <VerticalTimeline lineColor={'#04E2B7'}>
         {post.map((item, i) => {
           return <VerticalTimelineElement className="postTimelineElement" 
-          date={moment(item.date).format('LL')}
-          contentStyle={{ background: '#8075FF', color: '#fff', border: '2px #04E2B7 solid'}}
-          iconStyle={{ background: '#3D007A'}}
-          icon={<FlareIcon fontSize='large' style={{color:'#04E2B7'}}/>}
-          key={i}><PostsPage post={item}/></VerticalTimelineElement> 
+            date={moment(item.date).format('LL')}
+            contentStyle={{ background: '#8075FF', color: '#fff', border: '2px #04E2B7 solid'}}
+            iconStyle={{ background: '#3D007A'}}
+            icon={<FlareIcon fontSize='large' style={{color:'#04E2B7'}}/>}
+            key={i}><PostsPage post={item}/>
+          </VerticalTimelineElement> 
         })}
       </VerticalTimeline>
       <Link to={'/addpost'}><Button size='large' sx={{width: 400, border: '2px #04E2B7 solid'}} className='addPostBtn' variant="contained" color="secondary">Add New</Button></Link>

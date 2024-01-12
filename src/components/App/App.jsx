@@ -34,8 +34,11 @@ function App() {
         main: '#09074B'
       },
       secondary: {
-        main: '#3D007A'
+        main: '#8075FF'
       },
+      tertiary: {
+        main: '#04E2B7'
+      }
     }
   })
 

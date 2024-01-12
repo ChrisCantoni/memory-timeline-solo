@@ -3,15 +3,21 @@
     width: 30px;
 }
 
+table {
+    border-radius: 25px;
+    border: 2px solid white;
+    background-color: #5803AC;
+}
+
 table, th, td {
-    border: 1px solid white;
+    border: 1px solid red;
     border-collapse: collapse;
     color: white;
     margin: 10px;
   }
 
   th, td {
-    background-color: #3D007A;
+    background-color:#5803AC;
     margin: 10px;
     padding: 10px;
   }
@@ -25,3 +31,4 @@ table, th, td {
 body {
     background-color: white;
 }
+

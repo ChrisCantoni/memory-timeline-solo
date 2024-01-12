@@ -5,12 +5,17 @@ import {useDispatch, useSelector} from 'react-redux';
 import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Swal from 'sweetalert2';
+import { Dayjs } from 'dayjs';
+import TextField from '@mui/material/TextField';
+import AddTimeline from '../AddTimeline/AddTimeline.jsx';
 
 function TimelinePage() {
 
     const dispatch = useDispatch();
     const timelinesList = useSelector(store => store.timelines)
-    
+    let [newTimeline, setNewTimeline] = useState({title: ''})
+    const [addTimelineToggle, setAddTimelineToggle] = useState(false);
 
     const getTimelines = () => {
         dispatch({type: 'FETCH_TIMELINES'})
@@ -23,6 +28,22 @@ function TimelinePage() {
         getTimelines();
     }, []);
 
+    const handleTitleChange = (e) => {
+        setNewTimeline({...newTimeline, title: e.target.value})
+    };
+
+    const handleCancel = () => {
+        setAddTimelineToggle(!addTimelineToggle);
+        setNewTimeline({title: ''});
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Button clicked', newTimeline)
+        dispatch({type: 'ADD_TIMELINE', payload: newTimeline})
+        setNewTimeline({title: ''});
+        setAddTimelineToggle(!addTimelineToggle);
+    }
     
 
     return (
@@ -43,7 +64,16 @@ function TimelinePage() {
                 })}
             </tbody>
         </table> 
-        <Link to={'/addtimeline'}><Button variant='contained' sx={{ backgroundColor: '#09074B', ":hover": {backgroundColor: 'secondary'}}}>Add a new Timeline</Button></Link>
+        <Button variant='contained' color="secondary" onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button>
+        {addTimelineToggle ? 
+        <>
+          <form onSubmit={handleSubmit}>
+            <TextField type='text' value={newTimeline.title} label="Timeline Name" onChange={handleTitleChange}/>
+            <br/>
+            <Button variant="contained" onClick={handleCancel}>Cancel</Button>
+            <Button type='submit' variant="contained">Create Timeline</Button>
+          </form> 
+        </>: ''}
         </>
     )
 }
