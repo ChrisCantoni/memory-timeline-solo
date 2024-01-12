@@ -18,10 +18,10 @@ function PostInput() {
     const dispatch = useDispatch();
     const timelineList = useSelector(store => store.timelines)
 
-    let currentDate = dayjs(Date());
     // let newTime = currentDate.toISOString().slice(0, 16);
-    const [newDate, setNewDate] = useState(null);
-    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: newDate, timeline: 1})
+    // const [newDate, setNewDate] = useState(null);
+    
+    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: '', timeline: 1})
     
 
     const getTimelines = () => {
@@ -61,9 +61,9 @@ function PostInput() {
         setNewPost({...newPost, [e.target.name]: e.target.value})
     }
 
-    const handleDateChange = (e, date) => {
+    const handleDateChange = (e) => {
         console.log(e);
-        setNewDate(date);
+        setNewPost({...newPost, date: e.$d});
         // console.log(newPost.date);
     }
 
@@ -77,11 +77,11 @@ function PostInput() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(newDate);
+        // setNewPost({...newPost, date: newDate.$d})
         console.log(newPost)
-        // dispatch({type: 'ADD_POST', payload: newPost});
-        // setNewPost({title: '', description: '', notes: '', timeline: 1})
-        // history.push('/user');
+        dispatch({type: 'ADD_POST', payload: newPost});
+        setNewPost({title: '', description: '', date: '', notes: '', timeline: 1})
+        history.push('/user');
     }
 
     return (
@@ -99,7 +99,7 @@ function PostInput() {
                 <input type='text' name="description" value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 <label>Date:</label>
                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker name="date" value={newDate} onChange={setNewDate} />
+                        <DatePicker name="date" value={newPost.date} onChange={handleDateChange} />
                     </LocalizationProvider>
                 {/* Dropdown with timelines to select one */}
                 <InputLabel id="select-timeline-dropdown">Select a timeline:</InputLabel>
