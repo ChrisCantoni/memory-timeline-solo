@@ -58,7 +58,7 @@ function UserPage() {
           key={i}><PostsPage post={item}/></VerticalTimelineElement> 
         })}
       </VerticalTimeline>
-      <Link to={'/addpost'}><Button size='large' sx={{border: '2px #04E2B7 solid'}} className='addPostBtn' variant="contained" color="secondary">Add New Post</Button></Link>
+      <Link to={'/addpost'}><Button size='large' sx={{width: 400, border: '2px #04E2B7 solid'}} className='addPostBtn' variant="contained" color="secondary">Add New</Button></Link>
     </div>
   </>
   );

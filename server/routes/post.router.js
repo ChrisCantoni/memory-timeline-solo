@@ -53,7 +53,7 @@ router.get('/details/:id', (req, res) => {
 // POST Route
 router.post('/', (req, res) => {
     if (req.body.notes === '') {
-  queryText = `INSERT INTO "post" ("title", "media_url", "date", "date_created", "user_id", "timeline_id")
+  queryText = `INSERT INTO "post" ("post_title", "media_url", "date", "date_created", "user_id", "timeline_id")
   VALUES (
     $1, $2, $3, CURRENT_TIMESTAMP, $4, $5
   );`

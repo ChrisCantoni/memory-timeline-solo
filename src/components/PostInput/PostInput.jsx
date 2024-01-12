@@ -47,8 +47,8 @@ function PostInput() {
         }
       }
 
-    const handleTitleChange = (e) => {
-        setNewPost({...newPost, title: e.target.value})
+    const handleChange = (e) => {
+        setNewPost({...newPost, [e.target.name]: e.target.value})
     }
 
     const handleDescChange = (e) => {
@@ -57,16 +57,6 @@ function PostInput() {
         } else {
             setNewPost({...newPost, notes: e.target.value})
         }
-    }
-
-    const handleDateChange = (e) => {
-        // setNewPost({...newPost, date: currentDate})
-        setNewPost({...newPost, date: e.target.value})
-    }
-
-    const handleTimelineSelect = (e) => {
-        console.log(e.target.value);
-        setNewPost({...newPost, timeline: e.target.value});
     }
 
     const handleSubmit = (e) => {
@@ -81,7 +71,7 @@ function PostInput() {
         <>
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>
-                <input type='text' value={newPost.title} onChange={handleTitleChange}/>
+                <input type='text' name="title" value={newPost.title} onChange={handleChange}/>
                 <label>Photo upload:</label>
                 <input
                     type="file"
@@ -89,12 +79,12 @@ function PostInput() {
                     onChange={onFileChange}
                     />
                 <label>Description:</label>
-                <input type='text' value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
+                <input type='text' name="description" value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 <label>Date:</label>
-                <input type='datetime-local' value={newTime} onChange={handleDateChange}/>
+                <input type='datetime-local' name='date' value={newTime} onChange={handleChange}/>
                 {/* Dropdown with timelines to select one */}
                 <label>Choose a timeline:</label>
-                <select name='timelines' value={newPost.timeline} onChange={handleTimelineSelect}>
+                <select name='timeline' value={newPost.timeline} onChange={handleChange}>
                     <option value="none" defaultValue disabled hidden>Select a Timeline</option>
                     {timelineList.map((item, i) => (
                         <option key={i} value={item.id}>{i + 1}. {item.title}</option>))}

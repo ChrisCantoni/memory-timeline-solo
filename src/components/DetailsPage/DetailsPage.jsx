@@ -26,16 +26,13 @@ function DetailsPage() {
     }
 
     const checkImage = () => {
-        console.log(details.media_url)
         if (details.media_url == undefined) {
             return;
         } else if (details.media_url.indexOf('http') === -1) {
-            console.log('Setting isImage to false')
             setIsImage(false)
         } else {
             setIsImage(true);
         }
-    
     };
 
     const editDetails = () => {
@@ -67,7 +64,8 @@ function DetailsPage() {
               Swal.fire({
                 title: "Deleted!",
                 text: "Your file has been deleted.",
-                icon: "success"
+                icon: "success",
+                iconColor: '#09074B'
               });
             dispatch({type: 'DELETE_POST', payload: id})
             history.push('/user');

@@ -7,15 +7,20 @@ import moment from 'moment';
 function PostsPage(props) {
 
     const dispatch = useDispatch();
-    const [isImage, setIsImage] = useState(true)
+    const [isImage, setIsImage] = useState(false)
 
     const checkImage = () => {
-        dispatch({type: 'EMPTY_DETAILS'});
-    if (props.post.media_url.indexOf('http') === -1) {
-        setIsImage(false)
-    }};
+        if (props.post.media_url == undefined) {
+            return;
+        } else if (props.post.media_url.indexOf('http') === -1) {
+            setIsImage(false)
+        } else {
+            setIsImage(true);
+        }
+    };
 
     const handleDetails = (id) => {
+        dispatch({type: 'EMPTY_DETAILS'});
         console.log('You clicked on id #', id)
         dispatch({type: 'FETCH_DETAILS', payload: id})
     }
