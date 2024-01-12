@@ -1,14 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import TimelineItem from '../TimelineItem/TimelineItem.jsx';
 import {useDispatch, useSelector} from 'react-redux';
-import { Link } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import Swal from 'sweetalert2';
-import { Dayjs } from 'dayjs';
 import TextField from '@mui/material/TextField';
-import AddTimeline from '../AddTimeline/AddTimeline.jsx';
 
 function TimelinePage() {
 

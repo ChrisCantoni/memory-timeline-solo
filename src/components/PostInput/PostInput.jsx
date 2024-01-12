@@ -8,7 +8,9 @@ import InputLabel from '@mui/material/InputLabel';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { Dayjs } from 'dayjs';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
 
 function PostInput() {
 
@@ -16,9 +18,11 @@ function PostInput() {
     const dispatch = useDispatch();
     const timelineList = useSelector(store => store.timelines)
 
-    let currentDate = new Date();
-    let newTime = currentDate.toISOString().slice(0, 16);
-    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: newTime, timeline: 1})
+    let currentDate = dayjs(Date());
+    // let newTime = currentDate.toISOString().slice(0, 16);
+    const [newDate, setNewDate] = useState(null);
+    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: newDate, timeline: 1})
+    
 
     const getTimelines = () => {
         dispatch({type: 'FETCH_TIMELINES'})
@@ -57,6 +61,12 @@ function PostInput() {
         setNewPost({...newPost, [e.target.name]: e.target.value})
     }
 
+    const handleDateChange = (e, date) => {
+        console.log(e);
+        setNewDate(date);
+        // console.log(newPost.date);
+    }
+
     const handleDescChange = (e) => {
         if (!newPost.description.includes('http')) {
             setNewPost({...newPost, description: e.target.value})
@@ -67,10 +77,11 @@ function PostInput() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        console.log(newDate);
         console.log(newPost)
-        dispatch({type: 'ADD_POST', payload: newPost});
-        setNewPost({title: '', description: '', notes: '', date: newTime, timeline: 1})
-        history.push('/user');
+        // dispatch({type: 'ADD_POST', payload: newPost});
+        // setNewPost({title: '', description: '', notes: '', timeline: 1})
+        // history.push('/user');
     }
 
     return (
@@ -87,9 +98,9 @@ function PostInput() {
                 <label>Description:</label>
                 <input type='text' name="description" value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 <label>Date:</label>
-                   
-                    <DatePicker name="date" onchange={handleChange} />
-               
+                   <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DatePicker name="date" value={newDate} onChange={setNewDate} />
+                    </LocalizationProvider>
                 {/* Dropdown with timelines to select one */}
                 <InputLabel id="select-timeline-dropdown">Select a timeline:</InputLabel>
                 <Select labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={newPost.timeline} onChange={handleChange}>
