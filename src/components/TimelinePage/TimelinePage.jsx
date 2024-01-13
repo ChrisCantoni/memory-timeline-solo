@@ -59,6 +59,7 @@ function TimelinePage() {
                 })}
             </tbody>
         </table> 
+        <div className="addTimelineBtn">
         <Button variant='contained' color="secondary" onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button>
         {addTimelineToggle ? 
         <>
@@ -69,6 +70,7 @@ function TimelinePage() {
             <Button type='submit' variant="contained">Create Timeline</Button>
           </form> 
         </>: ''}
+        </div>
         </>
     )
 }

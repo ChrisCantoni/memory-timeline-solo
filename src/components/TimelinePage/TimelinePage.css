@@ -10,7 +10,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid red;
+    border: 1px solid white;
     border-collapse: collapse;
     color: white;
     margin: 10px;
@@ -23,7 +23,7 @@ table, th, td {
   }
 
 .timelinesTable {
-    margin: 10px;
+    margin: auto;
     padding: 10px;
     min-width: 4000;
 }
@@ -32,3 +32,6 @@ body {
     background-color: white;
 }
 
+.addTimelineBtn {
+    margin: auto !important;
+}
