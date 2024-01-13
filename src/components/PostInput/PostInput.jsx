@@ -95,12 +95,12 @@ function PostInput() {
             <Card sx={{margin: 'auto', backgroundColor: '#3D007A', maxWidth: 800}}>
                 <CardContent sx={{backgroundColor: '#3D007A', margin: 'auto'}}>
             <form onSubmit={handleSubmit}>
-                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF'}}>
-                    <Typography backgroundColor='#8075FF' color="#04E2B7" gutterBottom variant="h5">Title:</Typography>
+                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF'}}>
+                    <Typography color="#3D007A" gutterBottom variant="h5">Title:</Typography>
                     <TextField type='text' minWidth='400' name="title" value={newPost.title} onChange={handleChange}/>
                 </Card>
-                <Card sx={{margin: '10px auto', maxWidth: 420, backgroundColor: '#8075FF'}}>
-                    <Typography padding="10px" color="#04E2B7" gutterBottom variant="h5">Photo upload:</Typography>
+                <Card sx={{margin: '10px auto', maxWidth: 420, border:'5px solid #8075FF'}}>
+                    <Typography padding="10px" color="#3D007A" gutterBottom variant="h5">Photo upload:</Typography>
                     <input
                         style={{padding: '10px'}}
                         type="file"
@@ -108,24 +108,29 @@ function PostInput() {
                         onChange={onFileChange}
                         />
                 </Card>
-                <Card sx={{border: '2px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: 'white'}}>
-                    <Typography color="#04E2B7" gutterBottom variant="h5">Description:</Typography>
-                    <TextField type='text' name="description" sx={{minWidth: '400'}}
+                <Card sx={{ border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 360, backgroundColor: 'white'}}>
+                    <Typography color="#3D007A" gutterBottom variant="h5">Description:</Typography>
+                    <TextField type='text' name="description" sx={{minWidth: '400', maxWidth: '400'}}
                     value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
                 </Card>
-                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF'}}>
-                    <Typography color="#04E2B7" gutterBottom variant="h5">Date:</Typography>
+                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF'}}>
+                    <Typography color="#3D007A" gutterBottom variant="h5">Date:</Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker name="date" value={newPost.date} onChange={handleDateChange} backgroundColor="white" />
+                        <DatePicker slotProps={{
+                            textField: {
+                                size: "small",
+                                error: false,
+                            },
+                            }}name="date" value={newPost.date} onChange={handleDateChange} backgroundColor="white" />
                     </LocalizationProvider>
                 </Card>
                 {/* Dropdown with timelines to select one */}
-                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF'}}>
-                    <InputLabel id="select-timeline-dropdown">Select a timeline:</InputLabel>
-                    <Select  labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={newPost.timeline} onChange={handleChange}>
+                <Card sx={{border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400}}>
+                    <InputLabel sx={{color: '#3D007A'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
+                    <Select labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={newPost.timeline} onChange={handleChange}>
                         <MenuItem value="none" defaultValue disabled hidden>Select a Timeline</MenuItem>
                             {timelineList.map((item, i) => (
-                        <MenuItem color="#04E2B7" key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
+                        <MenuItem color="#3D007A" key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
                     </Select>
                 </Card>
                 <br/>
