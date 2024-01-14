@@ -43,8 +43,8 @@ function Nav() {
   return (
     <div className="nav">
       <Button className='navLink' onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "#04E2B7"}}/></Button>
-              {toggleSearch ? <><TextField variant='filled' className='searchField' sx={{backgroundColor: 'white'}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
-              <Button color='secondary' variant='contained' onClick={handleSubmit}>Submit</Button></> : ''}
+              {toggleSearch ? <div className='searchDiv'><TextField variant='filled' className='searchField' sx={{backgroundColor: 'white', height: 30}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
+              <Button color='secondary' variant='contained' size="small" onClick={handleSubmit}>Submit</Button></div> : ''}
       <Link to="/home">
         <h2 className="nav-title">StarGazer</h2>
       </Link>
@@ -81,25 +81,25 @@ function Nav() {
                   'aria-labelledby': 'basic-button',
                 }}>         
                 
-              <Link className="navLink" to="/user">
-                <HomeIcon/>
-              </Link>
+              <MenuItem onClick={handleClose}><Link className="navLink" to="/user">
+                <HomeIcon/> Home
+              </Link></MenuItem>
 
               
 
-              <Link className="navLink" to="/info">
-                <InfoIcon/>
-              </Link>
+              <MenuItem onClick={handleClose}><Link className="navLink" to="/info">
+                <InfoIcon/> Info
+              </Link></MenuItem>
 
-              <Link className="navLink" to="/timelines">
+              <MenuItem onClick={handleClose}><Link className="navLink" to="/timelines">
                 Timelines
-              </Link>
+              </Link></MenuItem>
 
-              <Link className="navLink" to="/about">
+              <MenuItem onClick={handleClose}><Link className="navLink" to="/about">
                 About
-              </Link>
+              </Link></MenuItem>
 
-              <LogOutButton className="navLink" />
+              <MenuItem onClick={handleClose}><LogoutIcon sx={{color:"#04E2B7"}}>Logout<LogOutButton className="navLink" /></LogoutIcon></MenuItem>
               </Menu>
             </div>
           </>
