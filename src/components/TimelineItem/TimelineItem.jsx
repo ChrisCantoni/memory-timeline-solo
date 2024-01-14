@@ -94,9 +94,9 @@ function TimelineItem(props) {
         <>
         <tr>
         <td>{props.item.title}</td> 
-        <td>{moment(props.item.date_created).format('LL')}</td>
+        <td>{moment(props.item.date_created).format('ll')}</td>
         <td><IOSSwitch sx={{ m: 1}} color='tertiary' checked={props.item.visible} onChange={() => handleVisible(props.item.id)}/></td>
-        <td><Button variant="contained" sx={{ backgroundColor: '#09074B', ":hover": {backgroundColor: 'secondary'}}} color="secondary" onClick={() => handleDeleteTimeline(props.item.id)}>Delete Timeline</Button></td>
+        <td><Button variant="contained" sx={{ backgroundColor: '#09074B', ":hover": {backgroundColor: 'secondary'}}} color="secondary" onClick={() => handleDeleteTimeline(props.item.id)}>Delete</Button></td>
         </tr>
         </>
     )

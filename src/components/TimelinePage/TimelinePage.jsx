@@ -43,7 +43,7 @@ function TimelinePage() {
 
     return (
         <>
-        <h1>This is the Timelines page</h1>
+        <h2>Timelines</h2>
         <table className='timelinesTable'>
             <thead>
                 <tr>
