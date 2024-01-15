@@ -6,7 +6,7 @@
 table {
     border-radius: 25px;
     border: 2px solid white;
-    background-color: #5803AC;
+    
 }
 
 table, th, td {
@@ -26,6 +26,7 @@ table, th, td {
     margin: auto;
     padding: 10px;
     min-width: 25%;
+    margin-top: 10px;
 }
 
 body {
@@ -38,3 +39,16 @@ body {
     justify-content: center;
 
 }
+
+th:first-of-type {
+    border-top-left-radius: 10px;
+  }
+  th:last-of-type {
+    border-top-right-radius: 10px;
+  }
+  tr:last-of-type td:first-of-type {
+    border-bottom-left-radius: 10px;
+  }
+  tr:last-of-type td:last-of-type {
+    border-bottom-right-radius: 10px;
+  }

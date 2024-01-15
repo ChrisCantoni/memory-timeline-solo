@@ -16,6 +16,7 @@ import CardActions from '@mui/material/CardActions';
 import TextField from '@mui/material/TextField';
 import dayjs from 'dayjs';
 import { Typography } from '@mui/material';
+import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import './PostInput.css';
 
 function PostInput() {
@@ -23,11 +24,11 @@ function PostInput() {
     const history = useHistory();
     const dispatch = useDispatch();
     const timelineList = useSelector(store => store.timelines)
+    const [togglePhoto, setTogglePhoto] = useState(false);
 
-    // let newTime = currentDate.toISOString().slice(0, 16);
-    // const [newDate, setNewDate] = useState(null);
+    let currentDate = new Date();
     
-    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: '', timeline: 1})
+    let [newPost, setNewPost] = useState({title: '', description: '', notes: '', date: currentDate, timeline: 1})
     
 
     const getTimelines = () => {
@@ -68,25 +69,21 @@ function PostInput() {
     }
 
     const handleDateChange = (e) => {
-        console.log(e);
         setNewPost({...newPost, date: e.$d});
-        // console.log(newPost.date);
     }
 
+    const handlePhoto = () => {setTogglePhoto(!togglePhoto)}
+
     const handleDescChange = (e) => {
-        if (!newPost.description.includes('http')) {
-            setNewPost({...newPost, description: e.target.value})
-        } else {
-            setNewPost({...newPost, notes: e.target.value})
-        }
+        setNewPost({...newPost, notes: e.target.value})
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // setNewPost({...newPost, date: newDate.$d})
+        if (newPost.title == '')
         console.log(newPost)
         dispatch({type: 'ADD_POST', payload: newPost});
-        setNewPost({title: '', description: '', date: '', notes: '', timeline: 1})
+        setNewPost({title: '', description: '', date: currentDate, notes: '', timeline: 1})
         history.push('/user');
     }
 
@@ -95,42 +92,42 @@ function PostInput() {
             <Card sx={{margin: 'auto', backgroundColor: '#3D007A', maxWidth: 800}}>
                 <CardContent sx={{backgroundColor: '#3D007A', margin: 'auto'}}>
             <form onSubmit={handleSubmit}>
-                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF'}}>
-                    <Typography color="#3D007A" gutterBottom variant="h5">Title:</Typography>
-                    <TextField type='text' minWidth='400' name="title" value={newPost.title} onChange={handleChange}/>
+                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
+                    <Typography color="#04E2B7" gutterBottom variant="h5">Title:</Typography>
+                    <TextField type='text' name="title" sx={{backgroundColor: 'white', width: 400 }}value={newPost.title} onChange={handleChange}/>
                 </Card>
-                <Card sx={{margin: '10px auto', maxWidth: 420, border:'5px solid #8075FF'}}>
-                    <Typography padding="10px" color="#3D007A" gutterBottom variant="h5">Photo upload:</Typography>
+                <Card sx={{ border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
+                    <Typography color="#04E2B7" gutterBottom variant="h5">Description:</Typography>
+                    <TextField type='text' name="description" sx={{width: 400}}
+                    value={newPost.notes} onChange={handleDescChange}/>
+                </Card>
+                <Card sx={{margin: '10px auto', maxWidth: 420, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
+                {!togglePhoto ? <AddAPhotoIcon sx={{margin: '10px auto', color: "#04E2B7"}} fontSize='large' onClick={handlePhoto}/> : <div><AddAPhotoIcon sx={{color: "#04E2B7"}} fontSize='large' onClick={handlePhoto}/><Typography padding="10px" color="#04E2B7" gutterBottom variant="h5">Photo upload:</Typography>
                     <input
                         style={{padding: '10px'}}
                         type="file"
                         accept="image/*"
                         onChange={onFileChange}
-                        />
-                </Card>
-                <Card sx={{ border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 360, backgroundColor: 'white'}}>
-                    <Typography color="#3D007A" gutterBottom variant="h5">Description:</Typography>
-                    <TextField type='text' name="description" sx={{minWidth: '400', maxWidth: '400'}}
-                    value={newPost.description.includes('http') ? newPost.notes : newPost.description} onChange={handleDescChange}/>
-                </Card>
-                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF'}}>
-                    <Typography color="#3D007A" gutterBottom variant="h5">Date:</Typography>
+                        /></div>
+                }</Card>
+                <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white', color: '#04E2B7'}}}>
+                    <Typography color="#04E2B7" gutterBottom variant="h5">Date:</Typography>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker slotProps={{
+                        <DatePicker sx={{marginLeft: '20%'}} slotProps={{
                             textField: {
                                 size: "small",
                                 error: false,
                             },
-                            }}name="date" value={newPost.date} onChange={handleDateChange} backgroundColor="white" />
+                            }}name="date" defaultValue={dayjs(currentDate)} onChange={handleDateChange} backgroundColor="white" />
                     </LocalizationProvider>
                 </Card>
                 {/* Dropdown with timelines to select one */}
-                <Card sx={{border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400}}>
-                    <InputLabel sx={{color: '#3D007A'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
-                    <Select labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={newPost.timeline} onChange={handleChange}>
+                <Card  sx={{ border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white', color: '#04E2B7'}}}>
+                    <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
+                    <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={newPost.timeline} onChange={handleChange}>
                         <MenuItem value="none" defaultValue disabled hidden>Select a Timeline</MenuItem>
                             {timelineList.map((item, i) => (
-                        <MenuItem color="#3D007A" key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
+                        <MenuItem backgroundcolor='white' key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
                     </Select>
                 </Card>
                 <br/>

@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
     console.log('Normal GET function');
   queryText = `SELECT "post".*, "timeline"."title" FROM "post" 
   JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
-  WHERE "post"."user_id" = $1 AND "timeline"."visible" = true ORDER BY "date";`;
+  WHERE "post"."user_id" = $1 AND "timeline"."visible" = true ORDER BY "date" DESC;`;
   pool.query(queryText, [req.user.id])
   .then((result) => {
     console.log('GET successful')
@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     queryText = `SELECT "post".*, "timeline"."title"  FROM "post"
     JOIN "timeline" ON "post"."timeline_id" = "timeline"."id"
     WHERE "post"."user_id" = $1 AND "timeline"."visible" = true  AND 
-    "post"."post_title" ILIKE $2 OR "media_url" ILIKE $2 OR "notes" ILIKE $2 ORDER BY "date";`;
+    "post"."post_title" ILIKE $2 OR "media_url" ILIKE $2 OR "notes" ILIKE $2 ORDER BY "date" DESC;`;
   pool.query(queryText, [req.user.id, searchTerm])
   .then((result) => {
     console.log('GET successful')
@@ -52,12 +52,12 @@ router.get('/details/:id', (req, res) => {
 
 // POST Route
 router.post('/', (req, res) => {
-    if (req.body.notes === '') {
+    if (!req.body.description.includes('http')) {
   queryText = `INSERT INTO "post" ("post_title", "media_url", "date", "date_created", "user_id", "timeline_id")
   VALUES (
     $1, $2, $3, CURRENT_TIMESTAMP, $4, $5
   );`
-  pool.query(queryText, [req.body.title, req.body.description, req.body.date, req.user.id, req.body.timeline])
+  pool.query(queryText, [req.body.title, req.body.notes, req.body.date, req.user.id, req.body.timeline])
   .then((result) => {
     res.sendStatus(201)
   }).catch((e) => {
@@ -65,7 +65,7 @@ router.post('/', (req, res) => {
     res.sendStatus(500);
   })}
   else {
-    queryText = `INSERT INTO "post" ("title", "media_url", "notes", "date", "date_created", "user_id", "timeline_id")
+    queryText = `INSERT INTO "post" ("post_title", "media_url", "notes", "date", "date_created", "user_id", "timeline_id")
   VALUES (
     $1, $2, $3, $4, CURRENT_TIMESTAMP, $5, $6
   );`

@@ -3,3 +3,26 @@
     justify-content: center;
     margin: auto;
 } */
+
+.MuiList-root {
+    background-color: #8075FF;
+}
+
+.MuiButtonBase-root {
+    color: #04E2B7 !important;
+    background-color:#8075FF;
+}
+
+.MuiButtonBase-root:hover {
+    background-color: #3D007A;
+}
+
+
+.MuiDateCalendar-root {
+    color:#04E2B7;
+    background-color: #8075FF;
+}
+
+.MuiDayCalendar-header{
+    color:#04E2B7;
+}
