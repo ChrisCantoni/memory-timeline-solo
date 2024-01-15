@@ -5,6 +5,7 @@
   align-items: center;
 
   margin: 0 0 ;
+  padding: 10px;
   background-color: #09074B;
   overflow: hidden;
 }
@@ -17,7 +18,7 @@
   font-size: 24px;
   font-weight: 700;
   color: #04E2B7;
-  padding-left: 10px;
+
   margin: 0;
 }
 
@@ -68,12 +69,13 @@
 .searchDiv {
   display: flex;
   align-items: flex-end;
+  padding-right: 5px;
 }
 
-.MuiFormControl-root {
+/* .MuiFormControl-root {
   padding-top: 0px !important;
   margin-top: 15px !important;
-}
+} */
 
 .MuiInputBase-input {
   margin-bottom: 10px !important;

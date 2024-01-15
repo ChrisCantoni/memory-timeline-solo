@@ -37,16 +37,20 @@ function Nav() {
     //Fetch posts that match user.id AND search term
     console.log(searchTerm);
     dispatch({type: 'FETCH_SEARCH', payload: searchTerm})
+    setSearchTerm('');
     setToggleSearch(false);
   }
 
   return (
     <div className="nav">
       <Button className='navLink' onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "#04E2B7"}}/></Button>
-              {toggleSearch ? <div className='searchDiv'><TextField variant='filled' className='searchField' sx={{backgroundColor: 'white', height: 30}} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
-              <Button color='secondary' variant='contained' size="small" onClick={handleSubmit}>Submit</Button></div> : ''}
+              {toggleSearch ? 
+                    <div className='searchDiv'>
+                    <TextField variant='filled' className='searchField' sx={{backgroundColor: 'white', width: 150, "& .MuiInputBase-root": {height: 30} }} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
+                    <Button color='secondary' variant='contained' size="small" onClick={handleSubmit}>Submit</Button>
+                    </div> : ''}
       <Link to="/home">
-        <h2 className="nav-title">StarGazer</h2>
+        <h2 className="nav-title">StarGaze</h2>
       </Link>
       <div>
       
