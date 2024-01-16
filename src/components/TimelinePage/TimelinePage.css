@@ -24,6 +24,7 @@ table, th, td {
 
 .timelinesTable {
     margin: auto;
+    padding-top: 20px;
     padding: 10px;
     min-width: 25%;
     margin-top: 10px;
@@ -39,6 +40,7 @@ body {
     justify-content: center;
 
 }
+
 
 th:first-of-type {
     border-top-left-radius: 10px;

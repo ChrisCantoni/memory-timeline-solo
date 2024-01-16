@@ -44,10 +44,9 @@ function UserPage() {
         <div class="star-layer" id="stars3"></div>
       </div>
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <br />
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
+      <div className='timelineDiv' id='timelineDiv'>
       <VerticalTimeline lineColor={'#04E2B7'}>
         {post.map((item, i) => {
           return <VerticalTimelineElement className="postTimelineElement" 
@@ -59,6 +58,7 @@ function UserPage() {
           </VerticalTimelineElement> 
         })}
       </VerticalTimeline>
+      </div>
       <Link to={'/addpost'}><Button size='large' sx={{width: 400, border: '2px #04E2B7 solid'}} className='addPostBtn' variant="contained" color="secondary">Add New</Button></Link>
     </div>
   </>

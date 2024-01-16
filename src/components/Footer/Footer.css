@@ -1,7 +1,9 @@
 footer {
-  margin-top: 80px;
   padding: 20px;
-  text-align: center;
+  padding-right: 10px;
+  text-align: right;
   background-color: #09074B;
-  color: #04E2B7; 
+  color: #04E2B7;
+  position: absolute;
+  width: 100%;
 }

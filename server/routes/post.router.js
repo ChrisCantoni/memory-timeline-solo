@@ -5,7 +5,6 @@ const router = express.Router();
 // GET Route
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
-  console.log('The Search params are', req.query.q)
   let searchTerm = "%" + req.query.q + "%";
   if (req.query.q == undefined) {
     console.log('Normal GET function');
@@ -93,7 +92,7 @@ router.put('/:id', (req, res) => {
   if(req.isAuthenticated()) {
     console.log('Req Body', req.body)
     let queryText = `UPDATE "post"
-    SET "title" = $1, "media_url" = $2, "notes" = $3
+    SET "post_title" = $1, "media_url" = $2, "notes" = $3
     WHERE "id" = $4 AND "user_id" = $5;
     `;
     pool.query(queryText, [req.body.title, req.body.media_url, req.body.notes, req.params.id, req.user.id])

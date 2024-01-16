@@ -5,6 +5,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import './DetailsPage.css';
 
 function DetailsPage() {
 

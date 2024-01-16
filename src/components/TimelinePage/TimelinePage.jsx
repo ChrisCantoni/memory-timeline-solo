@@ -42,7 +42,12 @@ function TimelinePage() {
     
 
     return (
-        <>
+    <div className='container'>
+        <div class="star-layers">
+            <div class="star-layer" id="stars"></div>
+            <div class="star-layer" id="stars2"></div>
+            <div class="star-layer" id="stars3"></div>
+        </div>
         <table className='timelinesTable'>
             <thead>
                 <tr>
@@ -69,8 +74,8 @@ function TimelinePage() {
             <Button type='submit' variant="contained">Create Timeline</Button>
           </form> 
         </>: ''}
-        </div>
-        </>
+    </div>
+    </div>
     )
 }
 

@@ -3,6 +3,11 @@
     padding-top: 56px;
 }
 
+.container {
+    height: 1500px;
+    width: 100%;
+}
+
 .MuiList-root {
     background-color: #8075FF;
 }
@@ -144,7 +149,7 @@ div {
         -webkit-transform: translateY(0px);
     }
     to {
-        -webkit-transform: translateY(-2000px);
+        -webkit-transform: translateY(-1000px);
     }
 }
 
@@ -153,7 +158,7 @@ div {
         -moz-transform: translateY(0px);
     }
     to {
-        -moz-transform: translateY(-2000px);
+        -moz-transform: translateY(-1000px);
     }
 }
 
@@ -162,7 +167,7 @@ div {
         -ms-transform: translateY(0px);
     }
     to {
-        -ms-transform: translateY(-2000px);
+        -ms-transform: translateY(-1000px);
     }
 }
 
@@ -171,6 +176,6 @@ div {
         transform: translateY(0px);
     }
     to {
-        transform: translateY(-2000px);
+        transform: translateY(-1000px);
     }
 }
