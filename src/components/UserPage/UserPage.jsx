@@ -38,11 +38,11 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   return (
     <>
-      {/* <div class="star-layers">
+      <div class="star-layers">
         <div class="star-layer" id="stars"></div>
         <div class="star-layer" id="stars2"></div>
         <div class="star-layer" id="stars3"></div>
-      </div> */}
+      </div>
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
       <br />

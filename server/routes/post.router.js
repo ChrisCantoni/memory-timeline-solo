@@ -4,6 +4,7 @@ const router = express.Router();
 
 // GET Route
 router.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
   console.log('The Search params are', req.query.q)
   let searchTerm = "%" + req.query.q + "%";
   if (req.query.q == undefined) {
@@ -31,12 +32,15 @@ router.get('/', (req, res) => {
   }).catch((error) => {
     console.log('GET error', error)
     res.sendStatus(500);
-  })}
+  })} } else {
+    res.sendStatus(401);
+  }
   }
 );
 
 // GET Details Route
 router.get('/details/:id', (req, res) => {
+  if (req.isAuthenticated()) {
     queryText = `SELECT "post".*, "timeline"."title" AS "timeline_title" FROM "post"
     JOIN "timeline" ON "timeline"."id" = "post"."timeline_id"
     WHERE "post"."user_id" = $1 AND "post"."id" = $2;`;
@@ -47,11 +51,14 @@ router.get('/details/:id', (req, res) => {
     }).catch((error) => {
         console.error('GET details error', error)
         res.sendStatus(500);
-    })
+    })} else {
+      res.sendStatus(401);
+    }
 })
 
 // POST Route
 router.post('/', (req, res) => {
+  if(req.isAuthenticated()) {
     if (!req.body.description.includes('http')) {
   queryText = `INSERT INTO "post" ("post_title", "media_url", "date", "date_created", "user_id", "timeline_id")
   VALUES (
@@ -76,11 +83,14 @@ router.post('/', (req, res) => {
     console.error(e);
     res.sendStatus(500);
   })
+  }} else {
+    res.sendStatus(401);
   }
 });
 
 // PUT Route
 router.put('/:id', (req, res) => {
+  if(req.isAuthenticated()) {
     console.log('Req Body', req.body)
     let queryText = `UPDATE "post"
     SET "title" = $1, "media_url" = $2, "notes" = $3
@@ -93,12 +103,15 @@ router.put('/:id', (req, res) => {
     }).catch((e) => {
         console.error(e);
         res.sendStatus(500);
-    })
+    })} else {
+      res.sendStatus(401);
+    }
 })
 
 
 // DELETE route
 router.delete('/:id', (req, res) => {
+  if(req.isAuthenticated()) {
     let queryText = `DELETE FROM "post" WHERE "id" = $1 AND "user_id" = $2;`;
     pool.query(queryText, [req.params.id, req.user.id])
     .then((result) => {
@@ -106,7 +119,9 @@ router.delete('/:id', (req, res) => {
     }).catch((err) => {
         console.error('deletion error', err)
         res.sendStatus(500)
-    })
+    })} else {
+      res.sendStatus(401);
+    }
 })
 
 

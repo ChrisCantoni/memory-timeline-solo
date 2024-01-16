@@ -11,7 +11,7 @@ import InfoIcon from '@mui/icons-material/Info';
 import MenuIcon from '@mui/icons-material/Menu';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import LogoutIcon from '@mui/icons-material/Logout';
+
 
 
 function Nav() {
@@ -46,12 +46,12 @@ function Nav() {
       <Button className='navLink' onClick={() => setToggleSearch(!toggleSearch)}><SearchIcon sx={{color: "#04E2B7"}}/></Button>
               {toggleSearch ? 
                     <div className='searchDiv'>
-                    <TextField variant='filled' className='searchField' sx={{backgroundColor: 'white', width: 150, "& .MuiInputBase-root": {height: 30} }} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
+                    <TextField variant='filled' className='searchField' sx={{backgroundColor: 'white', width: 170, "& .MuiInputBase-root": {height: 30} }} color='secondary' size='small' value={searchTerm} onChange={handleSearchChange}/>
                     <Button color='secondary' variant='contained' size="small" onClick={handleSubmit}>Submit</Button>
-                    </div> : ''}
-      <Link to="/home">
+                    </div> :  <Link to="/home">
         <h2 className="nav-title">StarGaze</h2>
-      </Link>
+      </Link>}
+     
       <div>
       
         {/* If no user is logged in, show these links */}
@@ -103,7 +103,7 @@ function Nav() {
                 About
               </Link></MenuItem>
 
-              <MenuItem onClick={handleClose}>Logout<LogOutButton className="navLink" /></MenuItem>
+              <MenuItem onClick={handleClose}><LogOutButton className="navLink" /></MenuItem>
               </Menu>
             </div>
           </>

@@ -34,7 +34,7 @@ function PostsPage(props) {
             <Link to={`/details/${props.post.id}`}>
                 <h4>{props.post.post_title}</h4> <br/> 
                 {!isImage ? <p>{props.post.media_url}</p> : <img className="imagePost" src={props.post.media_url} width={500}/> }<br/>
-                <small><strong>Notes:</strong> {props.post.notes}</small><br/>
+                {props.post.notes === null ? '' : <><small><strong>Notes:</strong> {props.post.notes}</small><br/></>}
             </Link>
         </div>
     )

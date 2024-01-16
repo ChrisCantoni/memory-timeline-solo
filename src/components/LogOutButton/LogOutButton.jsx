@@ -1,5 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import LogoutIcon from '@mui/icons-material/Logout';
+import '../Nav/Nav.css';
 
 function LogOutButton(props) {
   const dispatch = useDispatch();
@@ -10,8 +12,7 @@ function LogOutButton(props) {
       // is passed to it from it's parents through React props
       className={props.className}
       onClick={() => dispatch({ type: 'LOGOUT' })}
-    >
-      Log Out
+    ><LogoutIcon className='navLink' sx={{backgroundColor: '#8075FF'}} />
     </button>
   );
 }
