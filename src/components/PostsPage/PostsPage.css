@@ -11,17 +11,17 @@ a {
   }
 
   .container {
-    padding-top: 20px;
     padding-bottom: 0;
-    border: 2px solid magenta;
-    height: 100%;
-    overflow: scroll;
+  }
+
+  .star-layers {
+    overflow: hidden;
   }
 
   #timelineDiv {
     padding-top: 20px;
+    height: 100%;
     overflow: scroll;
-    padding-bottom: 0;
 
   }
   #timelineDiv::-webkit-scrollbar {

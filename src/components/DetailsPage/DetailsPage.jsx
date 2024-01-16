@@ -4,8 +4,10 @@ import {useHistory, useParams} from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import TextField from '@mui/material/TextField';
+import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import './DetailsPage.css';
+import Card from '@mui/material/Card';
 
 function DetailsPage() {
 
@@ -130,13 +132,17 @@ function DetailsPage() {
 
     return (
         <>
+        <div class="star-layer" id="stars"></div>
+        <div class="star-layer" id="stars2"></div>
+        <div class="star-layer" id="stars3"></div>
             <div className="postDetails" key={details.id}>
-                {toggleEditDetails === false ? 
+                <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
+                <Typography color="#04E2B7" variant="h5">{toggleEditDetails === false ? 
                     <h2>{details.post_title}</h2> : 
-                    <><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></>
+                    <div className='editDetails'><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
                 }
-                <br/>
-                {details.media_url != undefined && !isImage ? <>{toggleEditDetails === false ? <p>{details.media_url}</p> : <TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/>}</> : <img src={details.media_url} width={800}/>}
+                <br/></Typography>
+                {details.media_url != undefined && !isImage ? <>{toggleEditDetails === false ? <p>{details.media_url}</p> : <div className='editDetails'><TextField type='text' sx={{width: 400}} value={newDetails.title} onChange={handleTitleChange}/></div>}</> : <img src={details.media_url} width={800}/>}
                 {toggleEditDetails === true ? <div><label>Photo upload:</label>
                     <input
                     type="file"
@@ -147,13 +153,15 @@ function DetailsPage() {
                     <></>
                 }
                 <br/>
+                <Typography color="#04E2B7" variant="h5">
                 {toggleEditDetails === false ? 
-                    <p>Notes: {details.notes} </p> : <TextField type='text' sx={{width: 400}} defaultValue={newDetails.notes} onChange={handleNotesChange}/>
-                }
+                    <p>Notes: {details.notes} </p> : <div className="editDetails"><TextField type='text' sx={{width: 400}} defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
+                }</Typography>
                 <br/>
+                <Typography color="#04E2B7" variant="h5">
                     Timeline: {details.timeline_title}
                     {toggleEditDetails === true ? 
-                        <div>
+                        <div className="editDetails">
                             <label>Choose a timeline:</label>
                             <select name='timelines' value={newDetails.timeline} onChange={handleTimelineSelect}>
                             <option value="none" defaultValue disabled hidden>Select a Timeline</option>
@@ -162,17 +170,20 @@ function DetailsPage() {
                             </select>
                         </div> : <></>
                     }
+                    </Typography>
                 <div className="detailsButtons">
-                    <Button variant='contained' color='secondary' onClick={deletePost}>Delete Post</Button>
+                    <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={deletePost}>Delete Post</Button>
 
                     {toggleEditDetails === false ?
-                            <Button variant='contained' color='secondary' onClick={() => editDetails()}>Edit Details</Button> : 
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => editDetails()}>Edit Details</Button> : 
                         <div>
-                            <Button variant='contained' color='secondary' onClick={() => editDetails()}>Cancel</Button>
-                            <Button variant='contained' color='secondary' onClick={sendEdittoServer}>Save Changes</Button>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={() => editDetails()}>Cancel</Button>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={sendEdittoServer}>Save Changes</Button>
                         </div>
                     }
                 </div>
+                
+                </Card>
             </div>
         </>
     )
