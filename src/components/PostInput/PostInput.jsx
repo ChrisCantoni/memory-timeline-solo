@@ -94,14 +94,14 @@ function PostInput() {
             <form onSubmit={handleSubmit}>
                 <Card sx={{margin: '10px auto', padding: '10px', maxWidth: 400, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
                     <Typography color="#04E2B7" gutterBottom variant="h5">Title:</Typography>
-                    <TextField type='text' name="title" sx={{backgroundColor: 'white', width: 400 }}value={newPost.title} onChange={handleChange}/>
+                    <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%' }}value={newPost.title} onChange={handleChange}/>
                 </Card>
                 <Card sx={{ border:'5px solid #8075FF', margin: '10px auto', padding: '10px', maxWidth: 400, backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
                     <Typography color="#04E2B7" gutterBottom variant="h5">Description:</Typography>
-                    <TextField type='text' name="description" sx={{width: 400}}
+                    <TextField type='text' name="description" sx={{width: '100%'}}
                     value={newPost.notes} onChange={handleDescChange}/>
                 </Card>
-                <Card sx={{margin: '10px auto', maxWidth: 420, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
+                <Card style={{ display:'flex', justifyContent:'center', flexDirection: 'column' }} sx={{margin: '10px auto', maxWidth: 420, border:'5px solid #8075FF', backgroundColor: '#8075FF', '& .MuiInputBase-root': {backgroundColor: 'white'}}}>
                 {!togglePhoto ? <AddAPhotoIcon sx={{margin: '10px auto', color: "#04E2B7"}} fontSize='large' onClick={handlePhoto}/> : <div><AddAPhotoIcon sx={{color: "#04E2B7"}} fontSize='large' onClick={handlePhoto}/><Typography padding="10px" color="#04E2B7" gutterBottom variant="h5">Photo upload:</Typography>
                     <input
                         style={{padding: '10px'}}

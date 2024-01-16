@@ -103,7 +103,7 @@ function Nav() {
                 About
               </Link></MenuItem>
 
-              <MenuItem onClick={handleClose}><LogoutIcon sx={{color:"#04E2B7"}}>Logout<LogOutButton className="navLink" /></LogoutIcon></MenuItem>
+              <MenuItem onClick={handleClose}>Logout<LogOutButton className="navLink" /></MenuItem>
               </Menu>
             </div>
           </>
