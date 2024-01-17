@@ -16,6 +16,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
+import './DetailsPage.css';
 
 function DetailsPage() {
 
@@ -178,11 +179,11 @@ function DetailsPage() {
                                             }}name="date" defaultValue={dayjs(currentDate)} onChange={handleDateChange} backgroundColor="white" />
                                     </LocalizationProvider>}
                 {toggleEditDetails === false ? 
-                    <p>Notes: {details.notes} </p> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
+                    <p>{details.notes} </p> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
                 }</Typography>
                 <br/>
                 <Typography color="#04E2B7" variant="h5">
-                    Timeline: {details.timeline_title}
+                    <p>Timeline: {details.timeline_title}</p>
                     {toggleEditDetails === true ? 
                         <div className="editDetails">
                             <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>

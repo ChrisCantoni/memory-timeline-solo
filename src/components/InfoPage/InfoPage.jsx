@@ -12,7 +12,7 @@ function InfoPage() {
     <div class="star-layer" id="stars3"></div>
     <div className="infoContainer container">
       
-      <h2>Info Page</h2>
+      <h2 id='infoPage'>Info Page</h2>
       <div className="techUsed">
       <h3>Technologies Used:</h3>
       <ul>
@@ -38,7 +38,7 @@ function InfoPage() {
       </div>
       <div className="thanks">
       <h3>Thanks</h3>
-      <p>Thanks to my family, my friends, and the amazing and supportive Taaffeite Cohort, Prime Digital Academy 
+      <p id="thanks">Thanks to my family, my friends, and the amazing and supportive Taaffeite Cohort, Prime Digital Academy 
         and my wise yet patient instructor Chris for helping shepherd this project from the ether to reality.
       </p>
       </div>
