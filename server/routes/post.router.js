@@ -92,11 +92,18 @@ router.put('/:id', (req, res) => {
   if(req.isAuthenticated()) {
     console.log('Req Body', req.body)
     let queryText = `UPDATE "post"
-    SET "post_title" = $1, "media_url" = $2, "notes" = $3
-    WHERE "id" = $4 AND "user_id" = $5;
+    SET "post_title" = $1, "media_url" = $2, "notes" = $3, "date" = $4, "timeline_id" = $5
+    WHERE "id" = $6 AND "user_id" = $7;
     `;
-    pool.query(queryText, [req.body.title, req.body.media_url, req.body.notes, req.params.id, req.user.id])
-    .then((result) => {
+    pool.query(queryText, [
+      req.body.title, 
+      req.body.media_url, 
+      req.body.notes, 
+      req.body.date, 
+      req.body.timeline, 
+      req.params.id, 
+      req.user.id
+    ]).then((result) => {
         console.log('put request made')
         res.sendStatus(201)
     }).catch((e) => {

@@ -8,12 +8,21 @@ import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import './DetailsPage.css';
 import Card from '@mui/material/Card';
+import InputLabel from '@mui/material/InputLabel';
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
+import moment from 'moment';
 
 function DetailsPage() {
 
     const history = useHistory();
     const dispatch = useDispatch();
     const { id } = useParams();
+    let currentDate = new Date();
 
     const [toggleEditDetails, setToggleEditDetails]  = useState(false);
     const details = useSelector(store => store.details);
@@ -114,6 +123,11 @@ function DetailsPage() {
         setNewDetails({...newDetails, title: e.target.value});
     }
 
+    const handleDateChange = (e) => {
+        console.log(e)
+        setNewDetails({...newDetails, date: e.$d})
+    }
+
     const handleNotesChange = (e) => {
         setNewDetails({...newDetails, notes: e.target.value});
     }
@@ -139,7 +153,7 @@ function DetailsPage() {
                 <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
                 <Typography color="#04E2B7" variant="h5">{toggleEditDetails === false ? 
                     <h2>{details.post_title}</h2> : 
-                    <div className='editDetails'>Title: <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%' }} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
+                    <div className='editDetails'>Title: {details.post_title} <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%'}} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
                 }
                 <br/></Typography>
                 {details.media_url != undefined && !isImage ? <>{toggleEditDetails === false ? <p>{details.media_url}</p> : <div className='editDetails'><TextField type='text' sx={{width: 400}} value={newDetails.title} onChange={handleTitleChange}/></div>}</> : <img src={details.media_url} width={800}/>}
@@ -154,28 +168,40 @@ function DetailsPage() {
                 }
                 <br/>
                 <Typography color="#04E2B7" variant="h5">
+                    {toggleEditDetails === false? <h3>{moment(details.date).format('LL')}</h3> :
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker sx={{margin: 'auto'}} slotProps={{
+                                            textField: {
+                                                size: "small",
+                                                error: false,
+                                            },
+                                            }}name="date" defaultValue={dayjs(currentDate)} onChange={handleDateChange} backgroundColor="white" />
+                                    </LocalizationProvider>}
                 {toggleEditDetails === false ? 
-                    <p>Notes: {details.notes} </p> : <div className="editDetails"><TextField type='text' sx={{width: 400}} defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
+                    <p>Notes: {details.notes} </p> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
                 }</Typography>
                 <br/>
                 <Typography color="#04E2B7" variant="h5">
                     Timeline: {details.timeline_title}
                     {toggleEditDetails === true ? 
                         <div className="editDetails">
-                            <label>Choose a timeline:</label>
-                            <select name='timelines' value={newDetails.timeline} onChange={handleTimelineSelect}>
-                            <option value="none" defaultValue disabled hidden>Select a Timeline</option>
+                            <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
+                    <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={details.timeline} onChange={handleTimelineSelect}>
+                        
                             {timelineList.map((item, i) => (
-                                <option key={i} value={item.id}>{i+1}. {item.title}</option>))}
-                            </select>
+                        <MenuItem backgroundcolor='white' key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
+                    </Select>
                         </div> : <></>
                     }
                     </Typography>
                 <div className="detailsButtons">
-                    <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={deletePost}>Delete Post</Button>
+                    
 
                     {toggleEditDetails === false ?
-                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => editDetails()}>Edit Details</Button> : 
+                        <>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={deletePost}>Delete Post</Button>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => editDetails()}>Edit Details</Button>
+                        </> : 
                         <div>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={() => editDetails()}>Cancel</Button>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={sendEdittoServer}>Save Changes</Button>

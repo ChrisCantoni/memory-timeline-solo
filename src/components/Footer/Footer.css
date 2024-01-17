@@ -1,9 +1,13 @@
 footer {
-  padding: 20px 0;
+  padding: 5px 0;
   /*padding-right: 30px; */
   text-align: right;
   background-color: #09074B;
   color: #04E2B7;
   position: absolute;
   width: 100%;
+}
+
+p {
+  padding-right: 20px;
 }

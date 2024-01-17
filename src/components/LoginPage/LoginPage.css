@@ -1,0 +1,8 @@
+.loginPage,
+.registerPage {
+    padding-top: 56px;
+}
+
+.formPanel {
+    background-color: #8075FF;
+}
