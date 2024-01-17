@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import TextField from '@mui/material/TextField';
+import './TimelinePage.css';
 
 function TimelinePage() {
 
@@ -42,12 +43,13 @@ function TimelinePage() {
     
 
     return (
-    <div className='container'>
+        <>
         <div class="star-layers">
             <div class="star-layer" id="stars"></div>
             <div class="star-layer" id="stars2"></div>
             <div class="star-layer" id="stars3"></div>
-        </div>
+            </div>
+        <div className='timelineContainer container'>
         <table className='timelinesTable'>
             <thead>
                 <tr>
@@ -64,18 +66,19 @@ function TimelinePage() {
             </tbody>
         </table> 
         <div className="addTimelineBtn">
-        <Button variant='contained' color="secondary" onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button>
+        {/* <Button variant='contained' color="secondary" sx={{height: 36.5}} onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button> */}
         {addTimelineToggle ? 
         <>
           <form onSubmit={handleSubmit}>
-            <TextField type='text' value={newTimeline.title} label="Timeline Name" onChange={handleTitleChange}/>
+            <TextField type='text' sx={{backgroundColor: 'white', width: '100%' }} value={newTimeline.title} label="Timeline Name" onChange={handleTitleChange}/>
             <br/>
-            <Button variant="contained" onClick={handleCancel}>Cancel</Button>
-            <Button type='submit' variant="contained">Create Timeline</Button>
+            <Button variant="contained" color="secondary" onClick={handleCancel}>Cancel</Button>
+            <Button type='submit' color="secondary" variant="contained">Create Timeline</Button>
           </form> 
-        </>: ''}
+        </>: <Button variant='contained' color="secondary" sx={{height: 36.5}} onClick={() => setAddTimelineToggle(!addTimelineToggle)}>Add a new Timeline</Button>}
     </div>
     </div>
+    </>
     )
 }
 

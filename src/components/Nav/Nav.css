@@ -28,12 +28,10 @@
 .navLink {
   display: inline-block;
   color: #04E2B7;
-  /* background-color: #09074B; */
   text-align: center;
-  /* padding: 24px 10px; */
   text-decoration: none;
   font-size: 15px;
-
+  background-color: #8075FF;
   /* these last two make the logout button in
   the nav bar look like another link */
   border: none;
@@ -41,8 +39,16 @@
   outline: 0;
 }
 
-.navLink:hover {
-  background-color: #09074B;
+.menuDiv:hover .child {
+  background-color: #09074B !important;
+}
+
+MenuItem:hover .child{
+  background-color: #09074B !important;
+}
+
+.navLink:hover{
+  background-color: #09074B !important;
 }
 
 .MuiList-root {
@@ -61,10 +67,6 @@
 } */
 
 .searchField {
-  /* height: 10px !important;
-  padding-top: 8px !important;
-  padding-bottom: 10px !important;
-  margin-bottom: 10px; */
   background-color: white !important;
   color: white;
 }
@@ -74,11 +76,6 @@
   align-items: flex-end;
   padding-right: 5px;
 }
-
-/* .MuiFormControl-root {
-  padding-top: 0px !important;
-  margin-top: 15px !important;
-} */
 
 .MuiInputBase-input {
   margin-bottom: 10px !important;

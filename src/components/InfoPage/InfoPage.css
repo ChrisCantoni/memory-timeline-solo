@@ -1,0 +1,19 @@
+.infoContainer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 56px !important;
+    padding-left: 20px;
+    color: #04E2B7;
+    margin: auto;
+    width: 45vh !important;
+    background-color: #3D007A;
+    z-index: 10;
+}
+
+.techUsed .child{
+    text-align: center;
+}
+
+p {
+    width: 90%;
+}

@@ -87,15 +87,13 @@ function TimelineItem(props) {
       }));
       
 
-    // TODO: Set timelines up as a table
-
     return (
     
         <>
         <tr>
         <td>{props.item.title}</td> 
         <td>{moment(props.item.date_created).format('ll')}</td>
-        <td><IOSSwitch sx={{ m: 1}} color='tertiary' checked={props.item.visible} onChange={() => handleVisible(props.item.id)}/></td>
+        <td><IOSSwitch sx={{ m: 1, color: 'white'}} color='secondary' checked={props.item.visible} onChange={() => handleVisible(props.item.id)}/></td>
         <td><Button variant="contained" sx={{ backgroundColor: '#09074B', ":hover": {backgroundColor: 'secondary'}}} color="secondary" onClick={() => handleDeleteTimeline(props.item.id)}>Delete</Button></td>
         </tr>
         </>

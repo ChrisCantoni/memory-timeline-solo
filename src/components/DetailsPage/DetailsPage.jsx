@@ -139,7 +139,7 @@ function DetailsPage() {
                 <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
                 <Typography color="#04E2B7" variant="h5">{toggleEditDetails === false ? 
                     <h2>{details.post_title}</h2> : 
-                    <div className='editDetails'><TextField type='text' sx={{width: 400}} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
+                    <div className='editDetails'>Title: <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%' }} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
                 }
                 <br/></Typography>
                 {details.media_url != undefined && !isImage ? <>{toggleEditDetails === false ? <p>{details.media_url}</p> : <div className='editDetails'><TextField type='text' sx={{width: 400}} value={newDetails.title} onChange={handleTitleChange}/></div>}</> : <img src={details.media_url} width={800}/>}

@@ -1,6 +1,6 @@
 footer {
-  padding: 20px;
-  padding-right: 30px;
+  padding: 20px 0;
+  /*padding-right: 30px; */
   text-align: right;
   background-color: #09074B;
   color: #04E2B7;
