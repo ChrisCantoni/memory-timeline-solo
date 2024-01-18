@@ -57,7 +57,7 @@ function UserPage() {
         {post.map((item, i) => {
           return <VerticalTimelineElement className="postTimelineElement" 
             date={moment(item.date).format('LL')}
-            contentStyle={{ background: '#8075FF', color: '#fff', border: '2px #04E2B7 solid'}}
+            contentStyle={{ background: '#8075FF', color: '#fff', border: '2px #04E2B7 solid', fontFamily: `'Ubuntu', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif`}}
             iconStyle={{ background: '#3D007A'}}
             icon={<FlareIcon fontSize='large' style={{color:'#04E2B7'}}/>}
             onTimelineElementClick={() => handleDetails(item.id)}

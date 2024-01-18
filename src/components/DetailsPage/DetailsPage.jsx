@@ -29,8 +29,7 @@ function DetailsPage() {
     const details = useSelector(store => store.details);
     const timelineList = useSelector(store => store.timelines);
 
-    let [newDetails, setNewDetails] = useState({title: details.title, date: details.date, notes: details.notes, timeline: details.timeline });
-
+    let [newDetails, setNewDetails] = useState({title: details.title, date: details.date, notes: details.notes, timeline: details.timeline_id });
     const [isImage, setIsImage] = useState(true);
     
 
@@ -59,7 +58,7 @@ function DetailsPage() {
             media_url: details.media_url,
             notes: details.notes, 
             date: details.date, 
-            timeline: details.timeline
+            timeline: details.timeline_id
         });
     };
 
@@ -118,7 +117,7 @@ function DetailsPage() {
         dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
         setToggleEditDetails(false);
         setNewDetails({title: details.post_title, media_url: details.media_url, 
-            date: details.date, timeline: details.timeline});
+            date: details.date, timeline: details.timeline_id});
     }
 
     const handleTitleChange = (e) => {
@@ -143,7 +142,14 @@ function DetailsPage() {
     }, [])
     useEffect(() => {
         checkImage();
-    }, [details])
+    }, [details]);
+    useEffect(() => {
+        if (details) {
+            console.log(details);
+            setNewDetails(details)
+            console.log(details);
+        }
+    }, [details]);
 
     return (
         <>
@@ -187,8 +193,9 @@ function DetailsPage() {
                     {toggleEditDetails === true ? 
                         <div className="editDetails">
                             <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
-                    <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={details.timeline} onChange={handleTimelineSelect}>
-                        <MenuItem value={details.timeline} selected>Keep current timeline</MenuItem>
+                    <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" 
+                            label="Select a Timeline" name='timeline' value={details.timeline_id} onChange={handleTimelineSelect}>
+                        <MenuItem value={details.timeline} >Keep current timeline</MenuItem>
                             {timelineList.map((item, i) => (
                         <MenuItem backgroundcolor='white' key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
                     </Select>

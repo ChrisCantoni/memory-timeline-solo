@@ -46,6 +46,7 @@ body {
 .timelineContainer {
   padding-bottom: 0;
   padding-top: 56px !important;
+  filter: drop-shadow(0 0 0.3rem #E950C8)
 }
 
 
