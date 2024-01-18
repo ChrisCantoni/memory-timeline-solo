@@ -9,6 +9,6 @@ footer {
   width: 100%;
 }
 
-p {
-  padding-left: 60px;
+#footer {
+  padding-right: 40px;
 }

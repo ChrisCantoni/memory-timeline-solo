@@ -3,8 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding-top: 56px;
+    padding: 20px 0;
+    color:#04E2B7 !important;
 }
 
 .detailsButtons {

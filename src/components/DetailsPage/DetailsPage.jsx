@@ -29,7 +29,7 @@ function DetailsPage() {
     const details = useSelector(store => store.details);
     const timelineList = useSelector(store => store.timelines);
 
-    let [newDetails, setNewDetails] = useState({});
+    let [newDetails, setNewDetails] = useState({title: details.title, date: details.date, notes: details.notes, timeline: details.timeline });
 
     const [isImage, setIsImage] = useState(true);
     
@@ -49,7 +49,8 @@ function DetailsPage() {
     };
 
     const editDetails = () => {
-        console.log(isImage);
+        console.log(newDetails);
+        console.log(details);
         setToggleEditDetails(!toggleEditDetails);
         dispatch({type: 'FETCH_TIMELINES'})
         setNewDetails({
@@ -144,16 +145,14 @@ function DetailsPage() {
         checkImage();
     }, [details])
 
+    //! TIMELINE IS COMING BACK AS NULL AFTER EDIT. PLEASE FIX
 
     return (
         <>
-        <div class="star-layer" id="stars"></div>
-        <div class="star-layer" id="stars2"></div>
-        <div class="star-layer" id="stars3"></div>
             <div className="postDetails" key={details.id}>
                 <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
-                <Typography color="#04E2B7" variant="h5">{toggleEditDetails === false ? 
-                    <h2>{details.post_title}</h2> : 
+                <Typography color="#04E2B7" variant="h2">{toggleEditDetails === false ? 
+                    <>{details.post_title}</> : 
                     <div className='editDetails'>Title: {details.post_title} <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%'}} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
                 }
                 <br/></Typography>
@@ -168,8 +167,9 @@ function DetailsPage() {
                     <></>
                 }
                 <br/>
-                <Typography color="#04E2B7" variant="h5">
-                    {toggleEditDetails === false? <h3>{moment(details.date).format('LL')}</h3> :
+                
+                    {toggleEditDetails === false? <Typography color="#04E2B7" variant="h4"><>{moment(details.date).format('LL')}</></Typography> :
+                                        <Typography color="#04E2B7" variant="h4">
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker sx={{margin: 'auto'}} slotProps={{
                                             textField: {
@@ -177,18 +177,20 @@ function DetailsPage() {
                                                 error: false,
                                             },
                                             }}name="date" defaultValue={dayjs(currentDate)} onChange={handleDateChange} backgroundColor="white" />
-                                    </LocalizationProvider>}
+                                    </LocalizationProvider></Typography>}
+                
+                
                 {toggleEditDetails === false ? 
-                    <p>{details.notes} </p> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
-                }</Typography>
+                    <Typography color="#04E2B7" variant="body1"><>{details.notes}</></Typography> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
+                }
                 <br/>
                 <Typography color="#04E2B7" variant="h5">
-                    <p>Timeline: {details.timeline_title}</p>
+                    <>{details.timeline_title}</>
                     {toggleEditDetails === true ? 
                         <div className="editDetails">
                             <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
                     <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" label="Select a Timeline" name='timeline' value={details.timeline} onChange={handleTimelineSelect}>
-                        
+                        <MenuItem value={details.timeline} selected>Keep current timeline</MenuItem>
                             {timelineList.map((item, i) => (
                         <MenuItem backgroundcolor='white' key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
                     </Select>

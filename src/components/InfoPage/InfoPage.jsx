@@ -26,6 +26,8 @@ function InfoPage() {
         <li>Material UI</li>
         <li>Passport</li>
         <li>Cloudinary</li>
+        <li>sweetalert2</li>
+        <li>moment</li>
       </ul>
       </div>
       <div className="futurePlans">

@@ -49,10 +49,7 @@ function UserPage() {
       {/* <div className="star-layers">
         
       </div> */}
-    <div className="container star-layers">
-    <div class="star-layer" id="stars"></div>
-        <div class="star-layer" id="stars2"></div>
-        <div class="star-layer" id="stars3"></div>
+    <div className="container">
       {timelineList.length === 0 ? <div className='welcomePackage'><h2>Get started by adding your own timeline!</h2>
       <br/><Link to={'/addtimeline'}><Button variant="contained" color="secondary">Click Here to Add a Timeline</Button></Link></div> : ''}
       <div className='timelineDiv' id='timelineDiv'>
@@ -69,7 +66,9 @@ function UserPage() {
         })}
       </VerticalTimeline>
       </div>
+      <div className="addPostDiv">
       <Link to={'/addpost'}><Button size='large' sx={{width: 400, border: '2px #04E2B7 solid'}} className='addPostBtn' variant="contained" color="secondary">Add New</Button></Link>
+      </div>
     </div>
   </>
   );

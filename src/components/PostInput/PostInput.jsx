@@ -89,11 +89,6 @@ function PostInput() {
 
     return (
         <div className='container'>
-        <div class="star-layers">
-            <div class="star-layer" id="stars"></div>
-            <div class="star-layer" id="stars2"></div>
-            <div class="star-layer" id="stars3"></div>
-        </div>
         <div className='newPost'>
             <Card sx={{margin: 'auto', backgroundColor: '#3D007A', maxWidth: 800}}>
                 <CardContent sx={{backgroundColor: '#3D007A', margin: 'auto'}}>
