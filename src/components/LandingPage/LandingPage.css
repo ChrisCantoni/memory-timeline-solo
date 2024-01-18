@@ -11,12 +11,15 @@ Grid
   /* defaults to 'flex-start' */
   justify-content: flex-start;
   align-items: flex-start;
+  border: 10px solid transparent !important;
+  color: #04E2B7;
 }
 
 .grid-col {
   flex: 0 0 auto;
   padding: 0 0.5rem 0.5rem;
   box-sizing: border-box;
+  
 }
 
 .grid-col_1 {
@@ -37,6 +40,8 @@ Grid
 .grid-col_4 {
   flex-basis: 33.33333333%;
   max-width: 33.33333333%;
+  background-color: #3D007A;
+  padding-top: 20px;
 }
 
 .grid-col_5 {
@@ -57,6 +62,8 @@ Grid
 .grid-col_8 {
   flex-basis: 66.66666667%;
   max-width: 66.66666667%;
+  border: 10px solid transparent;
+  background-color: #8075FF;
 }
 
 .grid-col_9 {
@@ -77,4 +84,8 @@ Grid
 .grid-col_12 {
   flex-basis: 100%;
   max-width: 100%;
+}
+
+.landingContainer {
+  padding-top: 20px;
 }

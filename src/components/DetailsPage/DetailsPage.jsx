@@ -143,13 +143,6 @@ function DetailsPage() {
     useEffect(() => {
         checkImage();
     }, [details]);
-    useEffect(() => {
-        if (details) {
-            console.log(details);
-            setNewDetails(details)
-            console.log(details);
-        }
-    }, [details]);
 
     return (
         <>
