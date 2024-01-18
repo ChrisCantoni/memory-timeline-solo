@@ -145,8 +145,6 @@ function DetailsPage() {
         checkImage();
     }, [details])
 
-    //! TIMELINE IS COMING BACK AS NULL AFTER EDIT. PLEASE FIX
-
     return (
         <>
             <div className="postDetails" key={details.id}>

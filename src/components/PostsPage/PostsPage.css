@@ -1,6 +1,6 @@
 a {
     text-decoration: none;
-    color: #3D007A;
+    color: #04E2B7;
   }
 
   html {
@@ -12,6 +12,7 @@ a {
 
   .container {
     padding-bottom: 0;
+    font-family: 'Ubuntu', "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
  
   }
 
@@ -48,8 +49,8 @@ a {
 
   /* .postItem {
     background-color: #2082A6;
-  }
+  } */
 
   .postTimelineElement {
-    background-color: #2082A6;
-  } */
+    filter: drop-shadow(0 0 0.5rem #E950C8)
+  } 
