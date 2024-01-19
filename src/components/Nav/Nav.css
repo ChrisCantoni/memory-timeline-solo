@@ -17,6 +17,10 @@
   src: url('./AstroSpace.ttf');
 }
 
+.loginLink {
+  padding-left: 10px !important;
+}
+
 .nav a {
   text-decoration: none;
 }
