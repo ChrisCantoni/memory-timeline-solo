@@ -12,16 +12,20 @@
   width: 100%;
   overflow: hidden;
 }
+@font-face {
+  font-family: AstroSpace;
+  src: url('./AstroSpace.ttf');
+}
 
 .nav a {
   text-decoration: none;
 }
 
 .nav-title {
+  font-family: AstroSpace;
   font-size: 24px;
   font-weight: 700;
   color: #04E2B7;
-
   margin: 0;
 }
 
