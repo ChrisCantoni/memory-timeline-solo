@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
+
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { Typography, Button, Card } from '@mui/material';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
+  const [heading, setHeading] = useState('Welcome to StarGaze');
   const history = useHistory();
 
   const onLogin = (event) => {
@@ -15,51 +17,40 @@ function LandingPage() {
 
   return (
     <div className="landingContainer">
-      <h2>{heading}</h2>
+      <h2><span id='landingHeader'>{heading}</span></h2>
 
       <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
-
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
-
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
+        <div className="grid-col">
+          <Card sx={{maxWidth: 600, backgroundColor: '#8075FF', 
+          textAlign: 'center',
+            padding: '10px', border: '5px solid #3D007A', minHeight: '430px',
+            filter: 'drop-shadow(0 0 0.5rem #E950C8)'}}>
+            <Typography margin='auto' color="#04E2B7" variant="h6">
+            <p>StarGaze is an app for capturing memories. Instead of all those magical
+            moments being lost in the never-ending stream of our technological life, 
+            StarGaze allows you to capture special moments so you can revisit and remember them
+            outside of the bluster and horn-blowing of social media. </p>
+            
+            <p>These memories arent meant to be shared with the world, but with you, 
+              to remind yourself where you've been and inspire where you'll go next. 
+              To look up at the sky at night and feel the wonder that's keeping the stars apart.</p>
+              <p> If you haven't yet registered, begin your stargazing now!</p>
+            </Typography>
+          </Card>
         </div>
-        <div className="grid-col grid-col_4">
+        <div className="grid-col_4">
+          <Card sx={{maxWidth: 600, backgroundColor: '#8075FF', paddingBottom: '10px', marginLeft: '10px', 
+          filter: 'drop-shadow(0 0 0.5rem #E950C8)',
+          border: '5px solid #3D007A', minHeight: '440px'}}>
           <RegisterForm />
 
           <center>
             <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
+            <Button variant="contained" color='secondary' sx={{margin: '10px'}} className="btn btn_sizeSm" onClick={onLogin}>
               Login
-            </button>
+            </Button>
           </center>
+          </Card>
         </div>
       </div>
     </div>
