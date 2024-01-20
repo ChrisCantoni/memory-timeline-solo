@@ -37,12 +37,7 @@ Grid
   max-width: 25%;
 }
 
-.grid-col_4 {
-  flex-basis: 33.33333333%;
-  max-width: 33.33333333%;
-  background-color: #3D007A;
-  padding: 20px 0;
-}
+
 
 .grid-col_5 {
   flex-basis: 41.66666667%;
@@ -96,4 +91,11 @@ Grid
   border-radius: 25px;
   padding: 10px;
   background-color: #8075FF;
+}
+.grid-col_4 {
+  color:#04E2B7;
+} 
+
+center {
+  color:#04E2B7;
 }

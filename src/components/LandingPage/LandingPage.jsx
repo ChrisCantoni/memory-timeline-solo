@@ -38,6 +38,7 @@ function LandingPage() {
             </Typography>
           </Card>
         </div>
+        
         <div className="grid-col_4">
           <Card sx={{maxWidth: 600, backgroundColor: '#8075FF', paddingBottom: '10px', marginLeft: '10px', 
           filter: 'drop-shadow(0 0 0.5rem #E950C8)',
