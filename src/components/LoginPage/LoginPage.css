@@ -3,6 +3,18 @@
     padding-top: 56px;
 }
 
-.formPanel {
-    background-color: #8075FF;
+.loginFormPanel {
+    background-color: #8075FF !important;
+    color: #04E2B7;
+    border: 5px solid #3D007A;
+    filter: drop-shadow(0 0 0.5rem #E950C8);
+    box-sizing: border-box;
+  width: 400px;
+  max-width: 100%;
+  padding: 25px;
+  margin: 0 auto 20px;
+  background-color: #efefef;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
+
 }

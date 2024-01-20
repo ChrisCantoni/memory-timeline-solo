@@ -29,6 +29,13 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 function App() {
   const dispatch = useDispatch();
   const theme = createTheme({
+    typography: {
+      "fontFamily": `"Ubuntu", "Roboto", "Helvetica", "Arial", sans-serif`,
+      "fontSize": 14,
+      "fontWeightLight": 300,
+      "fontWeightRegular": 400,
+      "fontWeightMedium": 500
+     },
     palette: {
       primary: {
         main: '#09074B'

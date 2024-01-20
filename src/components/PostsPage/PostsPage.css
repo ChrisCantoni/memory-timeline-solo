@@ -1,6 +1,6 @@
 a {
     text-decoration: none;
-    color: #3D007A;
+    color: #04E2B7;
   }
 
   html {
@@ -12,17 +12,15 @@ a {
 
   .container {
     padding-bottom: 0;
+    font-family: 'Ubuntu', "Segoe UI", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ 
   }
 
-  .star-layers {
-    overflow: hidden;
-  }
 
   #timelineDiv {
-    padding-top: 20px;
+    padding-top: 40px;
     height: 100%;
     overflow: scroll;
-
   }
   #timelineDiv::-webkit-scrollbar {
     display: none;
@@ -31,10 +29,17 @@ a {
   .addPostBtn {
     position:fixed !important; 
     bottom: 0;
-    left: 40% !important;
-    margin-top:50% !important;
+    left: 36.8%;
     border: 10px solid #04E2B7;
     z-index: 5;
+    padding-right: 50px;
+    
+  }
+
+  .addPostDiv {
+    display: flex;
+    justify-content: center;
+
   }
 
   .imagePost {
@@ -44,8 +49,8 @@ a {
 
   /* .postItem {
     background-color: #2082A6;
-  }
+  } */
 
   .postTimelineElement {
-    background-color: #2082A6;
-  } */
+    filter: drop-shadow(0 0 0.5rem #E950C8)
+  } 

@@ -3,8 +3,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    padding-top: 56px;
+    padding: 60px 0;
+    color:#04E2B7 !important;
+    filter: drop-shadow(0 0 0.5rem #E950C8)
 }
 
 .detailsButtons {

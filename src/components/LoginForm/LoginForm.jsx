@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {useSelector} from 'react-redux';
+import '../LoginPage/LoginPage.css';
+import Button from '@mui/material/Button';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,7 +27,7 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
+    <form className="loginFormPanel" onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -57,7 +59,9 @@ function LoginForm() {
         </label>
       </div>
       <div>
-        <input className="btn" type="submit" name="submit" value="Log In" />
+        <Button variant="contained" sx={{backgroundColor: '#3D007A'}} className="btn" type="submit" name="submit" value="Log In">
+          Login
+          </Button>
       </div>
     </form>
   );
