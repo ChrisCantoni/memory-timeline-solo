@@ -1,5 +1,6 @@
 import React from 'react';
 import './InfoPage.css';
+import linkedIn from './linkedin.jpeg';
 // This is one of our simplest components
 // It doesn't have local state
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -7,9 +8,7 @@ import './InfoPage.css';
 
 function InfoPage() {
   return (
-    <><div class="star-layer" id="stars"></div>
-    <div class="star-layer" id="stars2"></div>
-    <div class="star-layer" id="stars3"></div>
+    <>
     <div className="infoContainer container">
       
       <h2 id='infoPage'>Info Page</h2>
@@ -33,7 +32,7 @@ function InfoPage() {
       <div className="futurePlans">
       <h3>Future Plans</h3>
       <ul>
-        <li>Add the ability to share timelines with others</li>
+        <li>Let posts belong to multiple timelines</li>
         <li>Add a function to present a random memory upon request</li>
         <li>Implement informational tags</li>
       </ul>
@@ -43,6 +42,11 @@ function InfoPage() {
       <p id="thanks">Thanks to my family, my friends, and the amazing and supportive Taaffeite Cohort, Prime Digital Academy 
         and my wise yet patient instructor Chris for helping shepherd this project from the ether to reality.
       </p>
+      </div>
+      <div className="LinkedIn">
+        <img width="300" src="https://media.licdn.com/dms/image/D5603AQEoONXDkJ2F0w/profile-displayphoto-shrink_200_200/0/1697640986588?e=1710979200&v=beta&t=yqNqPywYonRl0n6knlnC579WuycYdbC0Q9NFaGZrEUc"/>
+        <h3>linkedin.com/chriscantoni</h3>
+        <img width="300" src={linkedIn} alt="link to my linkedin profile"/>
       </div>
     </div>
     </>
