@@ -1,6 +1,7 @@
 import React from 'react';
 import './InfoPage.css';
 import linkedIn from './linkedin.jpeg';
+import linkedInLogo from './linkedin.png';
 // This is one of our simplest components
 // It doesn't have local state
 // It doesn't dispatch any redux actions or display any part of redux state
@@ -10,7 +11,7 @@ function InfoPage() {
   return (
     <div className="infoPage">
       <div>
-    <img width="300" src="https://media.licdn.com/dms/image/D5603AQEoONXDkJ2F0w/profile-displayphoto-shrink_200_200/0/1697640986588?e=1710979200&v=beta&t=yqNqPywYonRl0n6knlnC579WuycYdbC0Q9NFaGZrEUc"/>
+    <img id="linkedIn1" width="300" src="https://media.licdn.com/dms/image/D5603AQEoONXDkJ2F0w/profile-displayphoto-shrink_200_200/0/1697640986588?e=1710979200&v=beta&t=yqNqPywYonRl0n6knlnC579WuycYdbC0Q9NFaGZrEUc"/>
     </div>
     <div className="infoContainer container">
     <h2 id='infoPage'>Info</h2>
@@ -42,7 +43,7 @@ function InfoPage() {
       <div>
       <h3>Future Plans</h3>
       
-      <ul>
+      <ul className="todo">
         <li>Let posts belong to multiple timelines</li>
         <li>Add a function to present a random memory upon request</li>
         <li>Implement informational tags</li>
@@ -68,7 +69,10 @@ function InfoPage() {
       
     </div>
     <div>
-    <img width="300" src={linkedIn} alt="link to my linkedin profile"/>
+    <img id="linkedIn3" width="100" src={linkedInLogo}/>
+    <br/>
+    <img id="linkedIn2" width="300" src={linkedIn} alt="link to my linkedin profile"/>
+    
     </div>
     </div>
   );
