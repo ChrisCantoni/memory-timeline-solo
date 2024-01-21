@@ -35,12 +35,13 @@ function DetailsPage() {
     const details = useSelector(store => store.details);
     const timelineList = useSelector(store => store.timelines);
 
-    let [newDetails, setNewDetails] = useState({title: details.title, date: details.date, notes: details.notes, timeline: details.timeline_id });
+    let [newDetails, setNewDetails] = useState({title: details.post_title, date: details.date, notes: details.notes, timeline: details.timeline_id });
     const [isImage, setIsImage] = useState(true);
     
 
     const refreshPage = () => {
         dispatch({type: 'FETCH_DETAILS', payload: id})
+        dispatch({type: 'FETCH_TIMELINES'})
     }
 
     const checkImage = () => {
@@ -56,11 +57,11 @@ function DetailsPage() {
     const editDetails = () => {
         console.log(newDetails);
         console.log(details);
-        setToggleEditDetails(!toggleEditDetails);
+        setToggleEditing(!toggleEditing);
         dispatch({type: 'FETCH_TIMELINES'})
         setNewDetails({
             id: id,
-            title: details.title, 
+            title: details.post_title, 
             media_url: details.media_url,
             notes: details.notes, 
             date: details.date, 
@@ -128,6 +129,8 @@ function DetailsPage() {
     }
 
     const handleTitleChange = (e) => {
+        console.log(newDetails.title);
+        console.log(details.post_title);
         setNewDetails({...newDetails, title: e.target.value});
     }
 
@@ -164,7 +167,6 @@ function DetailsPage() {
                         component: 'form',
                         onSubmit: (event) => {
                             event.preventDefault();
-                            handleTitleChange(event);
                             setToggleEditing(!toggleEditing);
                             sendEdittoServer();
                         },
@@ -185,14 +187,14 @@ function DetailsPage() {
                             onChange={e => handleTitleChange(e)}
                             style={{ padding: '1px' }} />
                         <TextField 
-                        margin="dense"
-                        id="notes"
-                        name="notes"
-                        fullWidth
-                        variant="standard"
-                        defaultValue={newDetails.notes}
-                        onChange={e => handleNotesChange(e)}
-                        style={{ padding: '1px' }} />
+                            margin="dense"
+                            id="notes"
+                            name="notes"
+                            fullWidth
+                            variant="standard"
+                            defaultValue={details.notes}
+                            onChange={e => handleNotesChange(e)}
+                            style={{ padding: '1px' }} />
                         <Typography color="#04E2B7" variant="h4">
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                         <DatePicker sx={{margin: 'auto'}} slotProps={{
@@ -200,11 +202,11 @@ function DetailsPage() {
                                                 size: "small",
                                                 error: false,
                                             },
-                                            }}name="date" defaultValue={dayjs(newDetails.date)} onChange={handleDateChange} backgroundColor="white" />
+                                            }}name="date" defaultValue={dayjs(details.date)} onChange={handleDateChange} backgroundColor="white" />
                                     </LocalizationProvider></Typography>
                         <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
                         <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" 
-                                label="Select a Timeline" name='timeline' defaultValue={details.timeline_title} onChange={handleTimelineSelect}>
+                                label="Select a Timeline" name='timeline' defaultValue={newDetails.timeline} onChange={handleTimelineSelect}>
                                     
                             <MenuItem value={details.timeline} >Keep current timeline</MenuItem>
                                 {timelineList.map((item, i) => (
@@ -254,7 +256,6 @@ function DetailsPage() {
                     <Typography color="#04E2B7" variant="body1"><><u>Notes</u>: {details.notes}</></Typography> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
                 }
                 <br/>
-                {JSON.stringify(timelineList)}
                 <Typography color="#04E2B7" variant="h5">
                     <><small><u>Timeline:</u></small><br/>{details.timeline_title}</>
                     {toggleEditDetails === true ? 
@@ -275,7 +276,7 @@ function DetailsPage() {
                     {toggleEditDetails === false ?
                         <>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={deletePost}>Delete Post</Button>
-                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => setToggleEditing(!toggleEditing)}>Edit Details</Button>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => editDetails()}>Edit Details</Button>
                         </> : 
                         <div>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={() => editDetails()}>Cancel</Button>
