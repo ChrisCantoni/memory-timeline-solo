@@ -120,12 +120,9 @@ function DetailsPage() {
       }
 
     const sendEdittoServer = () => {
-        console.log('new details', newDetails)
-        console.log('details', details);
-        // dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
-        // setToggleEditDetails(false);
-        // setNewDetails({title: details.post_title, media_url: details.media_url, 
-        //     date: details.date, timeline: details.timeline_id});
+        dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
+        setNewDetails({title: details.post_title, media_url: details.media_url, 
+            date: details.date, timeline: details.timeline_id});
     }
 
     const handleTitleChange = (e) => {
@@ -162,6 +159,13 @@ function DetailsPage() {
         <>
             <div className="postDetails" key={details.id}>
                 <Dialog open={toggleEditing}
+                    sx={{
+                    '& .MuiPaper-root': {
+                      background: '#8075FF',
+                      color: '#04E2B7',
+                      filter: 'drop-shadow(0 0 0.5rem #E950C8)'
+                    }
+                    }}
                     onClose={() => setToggleEditing(!toggleEditing)}
                     PaperProps={{
                         component: 'form',
@@ -172,12 +176,11 @@ function DetailsPage() {
                         },
                     }}>
                         {/* //! Right here is where we're working */}
-                    <DialogTitle>Set post title</DialogTitle>
+                    <DialogTitle sx={{textAlign: 'center', fontSize: '36px', color: '#04E2B7'}}>Edit post</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
-                            New post title
-                        </DialogContentText>
+
                         <TextField autoFocus
+                            
                             margin="dense"
                             id="title"
                             name="title"
@@ -185,7 +188,9 @@ function DetailsPage() {
                             variant="standard"
                             defaultValue={details.post_title}
                             onChange={e => handleTitleChange(e)}
-                            style={{ padding: '1px' }} />
+                            InputProps={{ inputProps: { style: { color: '#04E2B7'}}}}
+                            style={{ padding: '1px', color: '#04E2B7' }} />
+        
                         <TextField 
                             margin="dense"
                             id="notes"
@@ -194,10 +199,13 @@ function DetailsPage() {
                             variant="standard"
                             defaultValue={details.notes}
                             onChange={e => handleNotesChange(e)}
-                            style={{ padding: '1px' }} />
+                            InputProps={{ inputProps: { style: { color: '#04E2B7'}}}}
+                            style={{ padding: '1px', color: '#04E2B7' }} />
                         <Typography color="#04E2B7" variant="h4">
+                        <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a date:</InputLabel>
                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                        <DatePicker sx={{margin: 'auto'}} slotProps={{
+                                        <DatePicker sx={{marginLeft: '65px', color: '#04E2B7'}} 
+                                            slotProps={{
                                             textField: {
                                                 size: "small",
                                                 error: false,
@@ -215,9 +223,9 @@ function DetailsPage() {
                     </DialogContent>
                     <DialogActions>
                             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
-                                <div className="first-row" style={{ width: '100%', marginBottom: '20px' }}>
-                                    <Button style={{ width: '50%', color: 'gray' }} onClick={() => setToggleEditing(!toggleEditing)}>Cancel</Button>
-                                    <Button variant="outlined" type="submit" style={{ width: '50%', color: '#DAA520', borderColor: '#DAA520' }}>Save</Button>
+                                <div className="first-row" style={{ width: '90%', marginBottom: '20px' }}>
+                                    <Button variant="contained" style={{ width: '40%', backgroundColor: '#09074B', marginRight: '60px' }} onClick={() => setToggleEditing(!toggleEditing)}>Cancel</Button>
+                                    <Button variant="contained" type="submit" style={{ width: '40%', color: '#DAA520', backgroundColor: '#3D007A' }}>Save</Button>
                                 </div>
                             </div>
                     </DialogActions>
