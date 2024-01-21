@@ -148,7 +148,7 @@ function DetailsPage() {
         <>
             <div className="postDetails" key={details.id}>
                 <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
-                <Typography color="#04E2B7" variant="h2">{toggleEditDetails === false ? 
+                <Typography color="#04E2B7" marginBottom="20px" variant="h2">{toggleEditDetails === false ? 
                     <>{details.post_title}</> : 
                     <div className='editDetails'>Title: {details.post_title} <TextField type='text' name="title" sx={{backgroundColor: 'white', width: '100%'}} defaultValue={newDetails.title} onChange={handleTitleChange}/></div>
                 }
@@ -178,11 +178,11 @@ function DetailsPage() {
                 
                 
                 {toggleEditDetails === false ? 
-                    <Typography color="#04E2B7" variant="body1"><>{details.notes}</></Typography> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
+                    <Typography color="#04E2B7" variant="body1"><><u>Notes</u>: {details.notes}</></Typography> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
                 }
                 <br/>
                 <Typography color="#04E2B7" variant="h5">
-                    <>{details.timeline_title}</>
+                    <><small><u>Timeline:</u></small><br/>{details.timeline_title}</>
                     {toggleEditDetails === true ? 
                         <div className="editDetails">
                             <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>

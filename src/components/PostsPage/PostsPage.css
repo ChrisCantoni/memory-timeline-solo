@@ -18,7 +18,7 @@ a {
 
 
   #timelineDiv {
-    padding-top: 40px;
+    padding-top: 50px;
     height: 100%;
     overflow: scroll;
   }
@@ -47,10 +47,14 @@ a {
     object-position: 25% 25%; 
   }
 
-  /* .postItem {
-    background-color: #2082A6;
-  } */
+  .postItem {
+    text-align: center;
+  }
 
   .postTimelineElement {
-    filter: drop-shadow(0 0 0.5rem #E950C8)
+    filter: drop-shadow(0 0 0.5rem #E950C8);
   } 
+
+  h4 {
+    margin: 0
+  }
