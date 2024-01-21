@@ -16,6 +16,11 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import moment from 'moment';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import './DetailsPage.css';
 
 function DetailsPage() {
@@ -26,6 +31,7 @@ function DetailsPage() {
     let currentDate = new Date();
 
     const [toggleEditDetails, setToggleEditDetails]  = useState(false);
+    const [toggleEditing, setToggleEditing] = useState(false);
     const details = useSelector(store => store.details);
     const timelineList = useSelector(store => store.timelines);
 
@@ -114,10 +120,11 @@ function DetailsPage() {
 
     const sendEdittoServer = () => {
         console.log('new details', newDetails)
-        dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
-        setToggleEditDetails(false);
-        setNewDetails({title: details.post_title, media_url: details.media_url, 
-            date: details.date, timeline: details.timeline_id});
+        console.log('details', details);
+        // dispatch({ type: 'EDIT_DETAILS', payload: newDetails});
+        // setToggleEditDetails(false);
+        // setNewDetails({title: details.post_title, media_url: details.media_url, 
+        //     date: details.date, timeline: details.timeline_id});
     }
 
     const handleTitleChange = (e) => {
@@ -144,9 +151,75 @@ function DetailsPage() {
         checkImage();
     }, [details]);
 
+    useEffect(() => {
+        checkImage();
+    }, [timelineList])
+
     return (
         <>
             <div className="postDetails" key={details.id}>
+                <Dialog open={toggleEditing}
+                    onClose={() => setToggleEditing(!toggleEditing)}
+                    PaperProps={{
+                        component: 'form',
+                        onSubmit: (event) => {
+                            event.preventDefault();
+                            handleTitleChange(event);
+                            setToggleEditing(!toggleEditing);
+                            sendEdittoServer();
+                        },
+                    }}>
+                        {/* //! Right here is where we're working */}
+                    <DialogTitle>Set post title</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            New post title
+                        </DialogContentText>
+                        <TextField autoFocus
+                            margin="dense"
+                            id="title"
+                            name="title"
+                            fullWidth
+                            variant="standard"
+                            defaultValue={details.post_title}
+                            onChange={e => handleTitleChange(e)}
+                            style={{ padding: '1px' }} />
+                        <TextField 
+                        margin="dense"
+                        id="notes"
+                        name="notes"
+                        fullWidth
+                        variant="standard"
+                        defaultValue={newDetails.notes}
+                        onChange={e => handleNotesChange(e)}
+                        style={{ padding: '1px' }} />
+                        <Typography color="#04E2B7" variant="h4">
+                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                        <DatePicker sx={{margin: 'auto'}} slotProps={{
+                                            textField: {
+                                                size: "small",
+                                                error: false,
+                                            },
+                                            }}name="date" defaultValue={dayjs(newDetails.date)} onChange={handleDateChange} backgroundColor="white" />
+                                    </LocalizationProvider></Typography>
+                        <InputLabel sx={{color: '#04E2B7'}} id="select-timeline-dropdown">Select a timeline:</InputLabel>
+                        <Select sx={{marginLeft: '20%', width: 230, "& .MuiInputBase-root": {backgroundColor: '#8075FF'}}} labelId="select-timeline-dropdown" 
+                                label="Select a Timeline" name='timeline' defaultValue={details.timeline_title} onChange={handleTimelineSelect}>
+                                    
+                            <MenuItem value={details.timeline} >Keep current timeline</MenuItem>
+                                {timelineList.map((item, i) => (
+                            <MenuItem backgroundcolor='white' key={i} value={item.id}>{i + 1}. {item.title}</MenuItem>))}
+                        </Select>
+                    </DialogContent>
+                    <DialogActions>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+                                <div className="first-row" style={{ width: '100%', marginBottom: '20px' }}>
+                                    <Button style={{ width: '50%', color: 'gray' }} onClick={() => setToggleEditing(!toggleEditing)}>Cancel</Button>
+                                    <Button variant="outlined" type="submit" style={{ width: '50%', color: '#DAA520', borderColor: '#DAA520' }}>Save</Button>
+                                </div>
+                            </div>
+                    </DialogActions>
+                </Dialog>
                 <Card sx={{margin: 'auto', padding: '20px', backgroundColor: '#8075FF', maxWidth: 1000, display: 'flex', alignItems: 'center', flexDirection: 'Column'}}>
                 <Typography color="#04E2B7" marginBottom="20px" variant="h2">{toggleEditDetails === false ? 
                     <>{details.post_title}</> : 
@@ -181,6 +254,7 @@ function DetailsPage() {
                     <Typography color="#04E2B7" variant="body1"><><u>Notes</u>: {details.notes}</></Typography> : <div className="editDetails">Notes: {details.notes}<br/><TextField type='text' sx={{backgroundColor: 'white', width: 500 }}  defaultValue={newDetails.notes} onChange={handleNotesChange}/></div>
                 }
                 <br/>
+                {JSON.stringify(timelineList)}
                 <Typography color="#04E2B7" variant="h5">
                     <><small><u>Timeline:</u></small><br/>{details.timeline_title}</>
                     {toggleEditDetails === true ? 
@@ -201,7 +275,7 @@ function DetailsPage() {
                     {toggleEditDetails === false ?
                         <>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={deletePost}>Delete Post</Button>
-                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => editDetails()}>Edit Details</Button>
+                            <Button variant='contained' color='secondary' sx={{margin: '10px'}} onClick={() => setToggleEditing(!toggleEditing)}>Edit Details</Button>
                         </> : 
                         <div>
                             <Button variant='contained' color='secondary' sx={{margin: '10px'}}onClick={() => editDetails()}>Cancel</Button>
