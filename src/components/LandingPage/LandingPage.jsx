@@ -40,12 +40,12 @@ function LandingPage() {
         </div>
         
         <div className="grid-col_4">
-          <Card sx={{maxWidth: 600, backgroundColor: '#8075FF', paddingBottom: '10px', marginLeft: '10px', 
-          filter: 'drop-shadow(0 0 0.5rem #E950C8)',
-          border: '5px solid #3D007A', minHeight: '440px'}}>
+          
           <RegisterForm />
-
-          <center>
+          <Card sx={{maxWidth: 620, backgroundColor: '#8075FF', paddingBottom: '10px', 
+          filter: 'drop-shadow(0 0 0.5rem #E950C8)',
+          border: '5px solid #3D007A', minHeight: 192}}>
+          <center >
             <h4>Already a Member?</h4>
             <Button variant="contained" sx={{backgroundColor: '#3D007A', margin: '10px'}} className="btn btn_sizeSm" onClick={onLogin}>
               Login

@@ -1,24 +1,67 @@
 .infoContainer {
     display: flex;
-    flex-direction: column;
-    padding-top: 56px !important;
-    padding-left: 20px;
+    flex-flow: column wrap;
+    flex-grow: 1;
+    justify-content: space-between;
+    padding-top: 40px !important;
+
     color: #04E2B7;
     margin: auto;
-    width: 45vh !important;
+    width: 50dvh !important;
+    height: 30% !important;
     background-color: #3D007A;
-    z-index: 10;
+    filter: drop-shadow(0 0 0.5rem #E950C8);
 }
 
-.techUsed .child{
-    text-align: center;
+.techUsed {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
 }
 
 #thanks {
     width: 80%;
-    padding-left: 20px;
+    padding-left: 40px;
+    text-align: center;
 }
 
 #infoPage {
     text-align: center;
+    
+}
+
+.linkedIn {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row nowrap;
+    margin-bottom: 20px;
+}
+
+.infoPage {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+
+#linkedIn3 {
+    padding: 20px;
+    padding-top: 70px;
+    filter: drop-shadow(0 0 0.5rem #E950C8);
+}
+
+#linkedIn1 {
+    filter: drop-shadow(0 0 0.5rem #E950C8);
+    padding-top: 200px !important;
+    padding: 20px;
+    
+}
+
+#linkedIn2 {
+    filter: drop-shadow(0 0 0.5rem #E950C8);
+    padding: 20px;
+    padding-top: 10px;
+}
+
+.todo {
+    margin-left: 60px;
 }

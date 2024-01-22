@@ -73,7 +73,7 @@ function Nav() {
               <Button
                 id="basic-button"
                 aria-controls={open ? 'basic-menu' : undefined}
-                aria-haspopup="true"
+                aria-haspopup="menu"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}>
                 <MenuIcon sx={{color:"#04E2B7"}}/>
@@ -87,25 +87,25 @@ function Nav() {
                   'aria-labelledby': 'basic-button',
                 }}>         
                 
-              <MenuItem onClick={handleClose}><Link className="navLink" to="/user">
-                <HomeIcon/> Home
-              </Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link className="navLink" to="/user">
+                    <HomeIcon/> Home
+                  </Link></MenuItem>
 
-              
+                  
 
-              <MenuItem onClick={handleClose}><Link className="navLink" to="/info">
-                <InfoIcon/> Info
-              </Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link className="navLink" to="/info">
+                    <InfoIcon/> Info
+                  </Link></MenuItem>
 
-              <MenuItem onClick={handleClose}><Link className="navLink" to="/timelines">
-                Timelines
-              </Link></MenuItem>
+                  <MenuItem onClick={handleClose}><Link className="navLink" to="/timelines">
+                    Timelines
+                  </Link></MenuItem>
 
-              <MenuItem onClick={handleClose}><Link className="navLink" to="/about">
-                About
-              </Link></MenuItem>
+                  {/* <MenuItem onClick={handleClose}><Link className="navLink" to="/about">
+                    About
+                  </Link></MenuItem> */}
 
-              <MenuItem onClick={handleClose}><LogOutButton className="navLink" /></MenuItem>
+                  <MenuItem onClick={handleClose}><LogOutButton className="navLink" /></MenuItem>
               </Menu>
             </div>
           </>

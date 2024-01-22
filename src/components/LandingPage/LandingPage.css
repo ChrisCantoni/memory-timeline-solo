@@ -94,8 +94,10 @@ Grid
 }
 .grid-col_4 {
   color:#04E2B7;
+  padding-left: 20px;
 } 
 
 center {
   color:#04E2B7;
+  padding-top: 18px;
 }

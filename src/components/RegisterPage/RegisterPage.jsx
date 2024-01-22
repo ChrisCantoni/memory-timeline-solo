@@ -9,11 +9,7 @@ function RegisterPage() {
 
   return (
     <>
-    <div class="star-layers">
-            <div class="star-layer" id="stars"></div>
-            <div class="star-layer" id="stars2"></div>
-            <div class="star-layer" id="stars3"></div>
-        </div>
+
     <div className='registerPage'>
       <RegisterForm />
 
