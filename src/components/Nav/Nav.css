@@ -88,3 +88,9 @@ MenuItem:hover .child{
 .MuiInputBase-input {
   margin-bottom: 10px !important;
 }
+
+#basic-menu {
+  position: absolute;
+  padding-right: 0px !important;
+}
+
