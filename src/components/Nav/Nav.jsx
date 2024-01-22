@@ -75,6 +75,7 @@ function Nav() {
                 aria-controls={open ? 'basic-menu' : undefined}
                 aria-haspopup="menu"
                 aria-expanded={open ? 'true' : undefined}
+                
                 onClick={handleClick}>
                 <MenuIcon sx={{color:"#04E2B7"}}/>
               </Button>
@@ -83,6 +84,7 @@ function Nav() {
                 anchorEl={anchorEl}
                 open={open}
                 onClose={handleClose}
+                inputProps={{MenuProps: {disableScrollLock: true}}}
                 MenuListProps={{
                   'aria-labelledby': 'basic-button',
                 }}>         
