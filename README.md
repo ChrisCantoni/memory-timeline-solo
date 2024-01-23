@@ -1,3 +1,17 @@
+# StarGaze
+### Description
+StarGaze is an app for capturing memories. Instead of all those magical moments being lost in the never-ending stream of our technological life, 
+StarGaze allows you to capture special moments so you can revisit and remember them outside of the bluster and horn-blowing of social media.
+
+The app enables you to create multiple timelines of memories that you can scroll or search through, to explore where you've been and how far you've come. 
+Your memories aren't made to be shared, they're just for you. You can create or delete timelines, or simply turn them off if you'd like to focus on one in particular. You can also create or delete or edits your posts as well. Once you create posts, they're instantly populated on the timeline according to whatever date you select.
+
+The app is designed for you, for private use, without the pressure and performative nature of social media. There are no likes to worry about here, no judgmental comments
+from the person you haven't seen since high school. Just you and your memories, the wonder that's keeping the stars apart.
+
+### Screenshot
+![A view of the main timeline](./public/maintimeline.png)
+![]
 
 # Prime Solo Project Starting Repo
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
