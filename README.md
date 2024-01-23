@@ -11,125 +11,73 @@ from the person you haven't seen since high school. Just you and your memories, 
 
 ### Screenshot
 ![A view of the main timeline](./public/maintimeline.png)
-![]
+![The add post page](./public/addnewpost.png)
+![Timelines page with option to turn visibility on or off](./public/maintimeline.png)
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+### Technologies Used:
+- Javascript
+- React
+- Redux
+- Sagas
+- Node.js
+- Express
+- PostgreSQL
+- Material UI
+- Passport
+- Cloudinary
+- sweetalert2
+- moment
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+### Steps Taken to Build This Project
 
-## Use the Template for This Repository (Don't Clone)
+A brief overview:
+- [x] Create To Do List
+- [x] Create database + link to project
+- [x] Create database file in project and create tables
+- [x] Add Cloudinary for uploading photos/videos
+- [x] React Components:
+	- [x] Login page - Already exists
+		- [x] Username input
+		- [x] Password input
+		- [x] Submit button (to Grand Timeline)
+	- [x] New User Register - Already exists
+		- [x] Username input
+		- [x] Password input
+		- [x] Submit button (returns to login)
+	- [x] Grand Timeline/Dashboard
+		- [x] Fetch posts from visible timelines ( GET request )
+	- [x] Timelines
+		- [x] Button to toggle visibility (PUT request)
+		- [x] Delete button (DELETE request)
+		- [x] Create New button (to Create New Timeline)
+	- [x] Create New Timeline
+		- [x] Timeline name input
+		- [x] Create button (POST request, back to Timelines page, GET request for all timelines)
+	- [x] PostItem
+		- [x] Inside Grand Timeline
+		- [x] Mapping over all posts connecting to a timeline
+		- [x] Post is clickable to take you to the Details page
+	- [x] Add New / Create PostItem
+		- [x] Textfield input
+		- [x] Title input
+		- [x] Date input (default value)
+		- [x] Notes input 
+		- [x] Timeline dropdown 
+		- [x] Submit button (Takes back to Grand Timeline, POST request, GET request on Grand Timeline)
+	- [x] Details/Edit page ('/:id')
+		- [x] Textfield input
+		- [x] Title input
+		- [x] Date input (default value)
+		- [x] Notes input
+		- [x] Timeline dropdown
+		- [x] Save button
+	- [x] Server Routes:
+		- [x] Timeline router
+		- [x] Post router
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account. Make the project `PUBLIC`!
 
+### Acknowledgements
+I could not have done this without the amazing support of Prime Digital Academy, the amazing members of my cohort, and the support of my family and friends. They have all been incredible.
 
-## Prerequisites
-
-Before you get started, make sure you have the following software installed on your computer:
-
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
-
-## Create database and table
-
-Create a new database called `prime_app` and create a `user` table:
-
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
-
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Development Setup Instructions
-
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
-
-## Debugging
-
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Testing Routes with Postman
-
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
-
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+### Support
+If you have suggestions or issues, feel free to email me at chris dot cantoni @ gmail
