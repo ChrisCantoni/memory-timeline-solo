@@ -12,7 +12,7 @@ from the person you haven't seen since high school. Just you and your memories, 
 ### Screenshot
 ![A view of the main timeline](./public/maintimeline.png)
 ![The add post page](./public/addnewpost.png)
-![Timelines page with option to turn visibility on or off](./public/maintimeline.png)
+![Timelines page with option to turn visibility on or off](./public/timelinespage.png)
 
 ### Technologies Used:
 - Javascript
